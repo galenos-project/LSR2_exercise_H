@@ -1,0 +1,239 @@
+---
+title: Mechanisms through which exercise reduces symptom severity and/or functional   impairment   in   posttraumatic
+  stress disorder (PTSD)
+author: "Simonne Wright"
+date: "2024-01-08"
+output: html_document
+---
+
+
+```{r  setup, error=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+#Load package 'meta' to run meta-analyses.
+library(meta)
+library(tidyr)
+library(tibble)
+library(stringr)
+library(readxl)
+library(grid)
+library(dplyr)
+library(Matrix)
+library(knitr)
+library(kableExtra)
+library(rms) 
+library(meta)
+library(devtools)
+library(tools)
+library(metafor)
+library(gtools)
+library(metasens)
+
+#loads datsets
+
+load("data_2023-12-4_LSR2_Awks2.RData")
+load("data_2023-12-4_LSR2_A_insufdata")
+
+#Round off results to two digits
+settings.meta(digits = 2)
+
+```
+
+# Results  
+
+## Flow of Study Selection and Descriptives
+
+We identified *number of records* records. The PRISMA flow chart describing the inclusion process is presented in Figure 1. 
+A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligable for inclusion. 
+
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses *references*. Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` studies *references*, which have been synthesized without an accompanying meta-analysis. 10 of the studies were RCTs, and 1 was a crossover RCT *reference*
+
+Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis are summarized in Table 1. From these `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies, there were `r length(table(data_2023_12_4_LSR2_Awks2$study))` eligable comparisons. 
+
+Study characteristics of the `r length(table(LSR2weeksStata2insufdata$studyN))` studies not included in the meta-analysis are summarized in Table 2. 
+From these `r length(table(LSR2weeksStata2insufdata$studyN))` studies, there were `r length(table(LSR2weeksStata2insufdata$study))` eligable comparisons. 
+
+## Meta-analysis of PTSD Symptom Severity (Primary Outcome)
+
+For the studies included in the meta-analyses, the earliest studies were performed in `r format(min((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`, while the most recent studies were performed in `r format(max((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`. The median sample size across the studies was `r round(median(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((data_2023_12_4_LSR2_Awks2$AGEm), na.rm=T))` years (ranging from `r round(min((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` to `r round(max((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` years).
+
+### Post-intervention (weeks)
+
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for PTSD symptom severity and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1PTSD3PTm)` effect measures to the PTSD symptom severity meta-analysis. The summary for PTSD symptom severity is shown in Figure 2.
+ 
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
+#SUMMARIZE the SMDs from studies using metacont & POOL the data 
+LSR2mainMA = metacont(tg1PTSD3PTn , tg1PTSD3PTm ,tg1PTSD3PTsd ,tg2PTSD3PTn, tg2PTSD3PTm, tg2PTSD3PTsd ,
+                      data = data_2023_12_4_LSR2_Awks2, studlab = study, sm = "SMD")
+
+forest(LSR2mainMA, 
+       sortvar = EXEaug,
+       common = FALSE,
+       print.I2.ci = T, 
+       prediction=T,
+       label.left = 'Favours intervention',
+       label.right = "Favours control",
+       leftcols = c("study", "Intervention", "Comparison"),
+       rightcols = c("effect", "ci"),
+       fs.study = 10, ff.study = "italic",
+       col.diamond = "blue", col.diamond.lines = "black",
+       col.square = "turquoise", col.square.lines = "black")
+```
+
+ **Figure 2:** Meta-analysis of the effects of exercise on PTSD symptom severity.
+ 
+The meta-analysis found no significant difference in PTSD symptom severity between exercise and comparison groups, `r paste(LSR2mainMA$sm, "=", round(LSR2mainMA$TE.random, 2), ", 95% CI (", round(LSR2mainMA$lower.random, 2), ",", round(LSR2mainMA$upper.random, 2), ")")`. While most studies lie to the left of the line of no effect, the wide confidence intervals of the individual studies cross over it.  Although the I2 value (0%) suggests there was no heterogeneity, some heterogeneity can be seen when inspecting the width of the confidence interval.
+ 
+## Subgroup Analyses 
+<!-- and Meta-regressions -->
+
+We explore whether heterogeneity could be potentially explained by differences in study-level characteristics using subgroup analyses and meta-regression below.T he following characteristics were explored as sources of heterogeneity for the primary outcome, PTSD symptom severity:
+
+- Exercise intensity (moderate intensity vs high intensity)
+
+- Specific exercise type (aerobic vs. anaerobic vs. mixed)
+
+- Exercise augmented by TAU/therapy (exercise only vs. therapy/tau)
+
+- Intervention length (weeks)
+
+### Subgroup analysis by exercise intensity
+
+There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). 
+
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
+subgroup.intensity = update(LSR2mainMA, subgroup = intensityEX2) 
+
+# produce a forest plot
+forest(subgroup.intensity, 
+       sortvar = EXEaug,
+       common = FALSE,
+       print.I2.ci = T, 
+       prediction=T,
+       label.left = 'Favours intervention',
+       label.right = "Favours control",
+       leftcols = c("study", "Intervention", "Comparison"),
+       rightcols = c( "effect", "ci"),
+       fs.study = 10, ff.study = "italic",
+       col.diamond = "blue", col.diamond.lines = "black",
+       col.square = "turquoise", col.square.lines = "black")
+```
+
+**Figure 3:** Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise intensity
+
+### Subgroup analysis by specific exercise type
+
+There was no significant difference in PTSD symptom severity between studies with aerobic or anaerobic or mixed exercise groups (see Figure 4). 
+
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
+# create a new R object subgroup.tg1specEX  
+subgroup.tg1specEX = update(LSR2mainMA, subgroup = tg1specEX2) 
+
+# produce a forest plot 
+forest(subgroup.tg1specEX, 
+       sortvar = EXEaug,
+       common = FALSE,
+       print.I2.ci = T, 
+       prediction=T,
+       label.left = 'Favours intervention',
+       label.right = "Favours control",
+       leftcols = c("study", "Intervention", "Comparison"),
+       rightcols = c( "effect", "ci"),
+       fs.study = 10, ff.study = "italic",
+       col.diamond = "blue", col.diamond.lines = "black",
+       col.square = "turquoise", col.square.lines = "black")
+```
+**Figure 4:** Sub-group analysis of the effects of exercise on PTSD symptom severity by specific exercise type
+
+### Subgroup analysis by exercise alone or tau/therapy augmented by exercise
+
+There was no significant difference in PTSD symptom severity between studies with exercise alone or tau/therapy augmented by exercise (see Figure 5). However, for studies which were not augmented by TAU or Therapy, the effect appears to be much larger as the prediction intervals for these studies does not cross the line of no effect.
+
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
+# create a new R object subgroup.EXEaug  
+subgroup.EXEaug = update(LSR2mainMA, subgroup = EXEaug2) 
+
+# produce a forest plot using the JAMA layout.
+forest(subgroup.EXEaug, 
+       sortvar = EXEaug,
+       common = FALSE,
+       print.I2.ci = T, 
+       prediction=T,
+       label.left = 'Favours intervention',
+       label.right = "Favours control",
+       leftcols = c("study", "Intervention", "Comparison"),
+       rightcols = c( "effect", "ci"),
+       fs.study = 10, ff.study = "italic",
+       col.diamond = "blue", col.diamond.lines = "black",
+       col.square = "turquoise", col.square.lines = "black")
+```
+
+**Figure 5:** Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise alone or tau/therapy augmented by exercise
+
+<!-- too few studies for meta-regression (<10) 
+### Meta-regression by intervention length
+
+Overall, the influence of intervention length on the treatment effect did not reach statistical significance intervention length (p = .136; see Figure 6)
+
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
+# Do a meta-regression with the continuous covariate intervLENGTH (lenth of intervention - weeks)
+intervLENGTHreg = metareg(LSR2mainMA, intervLENGTH)
+
+#generate a bubble plot.
+bubble(intervLENGTHreg, col.line = "blue")
+```
+
+**Figure 6:** Meta-regression of the effects of exercise on PTSD symptom severity by intervention length -->
+
+## Meta-analysis of Treatment Dropout (secondary outcome)
+
+### Post-intervention (weeks)
+
+ `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for treatment dropout, and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1Ndrop)` effect measures to the treatment dropout meta-analysis. The summary for treatment dropout is shown in Figure 7. 
+
+ 
+```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
+#Summarize the study-specific risk ratios for study completors from studies using metabin
+#create an object of class meta called “pooledRRdrop”
+pooledRRdrop = metabin(tg1Ndrop, tg1Nrandom,	tg2Ndrop,tg2Nrandom,
+                       data = data_2023_12_4_LSR2_Awks2, studlab = study, sm = "RR")
+
+#obtain the forest plot 
+forest(pooledRRdrop, 
+       sortvar = EXEaug,
+       common = FALSE,
+       print.I2.ci = T, 
+       prediction=T,
+       label.left = 'Favours intervention',
+       label.right = "Favours control",
+       leftcols = c("study", "Intervention", "Comparison"),
+       rightcols = c("effect", "ci"),
+       fs.study = 10, ff.study = "italic",
+       col.diamond = "blue", col.diamond.lines = "black",
+       col.square = "turquoise", col.square.lines = "black")
+```
+**Figure 7:** Meta-analysis of the effects of exercise on treatment dropout
+
+<!-- The coding in text isnt working -->
+The meta-analysis found no significant difference in treatment dropout between exercise and comparison groups, 
+`r paste(pooledRRdrop$rr, "=" , round(pooledRRdrop$TE.random, 2), ", 95% CI (", round(pooledRRdrop$lower.random, 2), ",", round(pooledRRdrop$upper.random, 2), ")")`. Heterogeneity was high (I2 = 79%).
+
+## Sensitivity Analyses 
+
+We examine the robustness of the findings for the primary outcome by restricting the analysis to studies with low risk of bias.
+
+
+<!-- too few studies for funnel plot (<10) 
+## Reporting Bias
+Visual inspection of the funnel plot of standard error Hedges’ g suggested possible publication bias in favour the of exercise group (n = 8). There was insufficient studies to test for small study effect.
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=3}
+ #Produce a funnel plot 
+funnel(LSR2mainMA, pch = 16,
+       contour = c(0.9, 0.95, 0.99),
+       col.contour = c("green", "yellow", "pink")) 
+
+legend(0.25, 1.25,
+       c("0.1 > p > 0.05", "0.05 > p > 0.01", "< 0.01"),
+       fill = c("green", "yellow", "pink"), bty = "n")
+```
+**Figure 8:** Funnel plot of all studies included in the meta-analyses -->
+
+## Summary of the Evidence
