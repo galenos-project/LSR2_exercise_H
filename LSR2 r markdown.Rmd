@@ -27,11 +27,11 @@ library(gtools)
 library(metasens)
 
 
-load("C:/Users/simon/Desktop/R.data.files/data_2023-12-4_LSR2_Awks2.RData")
-load("C:/Users/simon/Desktop/R.data.files/LSR2weeksStata2insufdata.RData")
+load("data_2023-12-4_LSR2_Awks2.RData")
+load("LSR2weeksStata2insufdata.RData")
 
-load("C:/Users/simon/Desktop/R.data.files/LSR2_studychartab_wks_140124.RData")
-load("C:/Users/simon/Desktop/R.data.files/LSR2_studychartab_insuf_140124.RData")
+load("LSR2_studychartab_wks_140124.RData")
+load("LSR2_studychartab_insuf_140124.RData")
 
 #Round off results to two digits
 settings.meta(digits = 2)
