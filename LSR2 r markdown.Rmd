@@ -100,9 +100,10 @@ Low heterogeneity was found as suggested by the small TAU value and non-signific
 
 <!--# Do not comment on heterogeneity by assessing the I2 -->
 
-#### Subgroup Analyses and Meta-regressions 
+#### Subgroup Analyses  
+<!-- and Meta-regressions -->   
 
-We explore whether heterogeneity could be potentially explained by differences in study-level characteristics using subgroup analyses and meta-regression below.T he following characteristics were explored as sources of heterogeneity for the primary outcome, PTSD symptom severity:
+We explore whether heterogeneity could be potentially explained by differences in study-level characteristics using subgroup analyses <!-- and meta-regression --> below. The following characteristics were explored as sources of heterogeneity for the primary outcome, PTSD symptom severity:
 
 -   Exercise intensity (moderate intensity vs high intensity)
 
@@ -114,7 +115,7 @@ We explore whether heterogeneity could be potentially explained by differences i
 
 #### Subgroup analysis by exercise intensity
 
-There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). However, the 95% CI for the pooled overall effect in the high intensity exercise groups lies to the left of the line of no effect, in favour of the exercise. While, the 95% CI for the pooled overall effect in the moderate intensity exercise groups lies almost in the centre line of no effect.
+There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). However, the 95% CI for the pooled overall effect in the high intensity exercise groups lies to the left of the line of no effect, in favour of the exercise intervention groups. While, the 95% CI for the pooled overall effect in the moderate intensity exercise groups lies almost in the centre of the line of no effect.
 
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
@@ -236,7 +237,7 @@ forest(pooledRRdrop,
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
 ```
-**Figure 7:** Meta-analysis of the effects of exercise on treatment dropout
+**Figure 7:** Meta-analysis of the dropout rates between the intervention and control groups 
 
 The meta-analysis found no evidence of a difference in treatment dropout between exercise and comparison groups, `r paste(pooledRRdrop$sm, "=" , round(pooledRRdrop$TE.random, 2), "(95% CI ", round(pooledRRdrop$lower.random, 2), "to", round(pooledRRdrop$upper.random, 2), ")")` and there is large heterogeneity, as shown by the prediction interval (`r paste(round(exp(pooledRRdrop$lower.predict),2), "to",round(exp(pooledRRdrop$upper.predict),2))`).
 
