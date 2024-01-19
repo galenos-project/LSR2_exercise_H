@@ -36,6 +36,12 @@ load("data/LSR2_studychartab_insuf_140124.RData")
 #Round off results to two digits
 settings.meta(digits = 2)
 
+#update study names for Whitworth pilot and main studies
+data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2018"] <- "Whitworth2019a"
+data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2019"] <- "Whitworth2019b"
+
+LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2018"] <- "Whitworth2019a"
+LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2019"] <- "Whitworth2019b"
 ```
 
 # Results
@@ -111,11 +117,11 @@ We explore whether heterogeneity could be potentially explained by differences i
 
 -   Exercise augmented by TAU/therapy (exercise only vs. therapy/tau)
 
--   Intervention length (weeks)
+<!-- -   Intervention length (weeks) -->  
 
 #### Subgroup analysis by exercise intensity
 
-There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). However, the 95% CI for the pooled overall effect in the high intensity exercise groups lies to the left of the line of no effect, in favour of the exercise intervention groups. While, the 95% CI for the pooled overall effect in the moderate intensity exercise groups lies almost in the centre of the line of no effect.
+There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). However, the 95% CI for the pooled overall effect in the high intensity exercise groups lies to the left of the line of no effect, in favour of the exercise intervention groups. While the 95% CI for the pooled overall effect in the moderate intensity exercise groups lies almost in the centre of the line of no effect.
 
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
