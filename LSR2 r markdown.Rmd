@@ -367,5 +367,6 @@ The primary outcome was efficacy in reducing overall PTSD symptom severity in pa
 
 |                          |                                  |                                   |                                |                                  |                               |
 |------------|------------|------------|------------|------------|------------|
-| **Source of evidence**   | **Summary of the association**   | **Bias due to study limitations** | **Bias due to reporting bias** | **Bias due to indirectedness**   | **Bias due to other reasons** |
-|                          |                                  |                                   |                                |                                  |                               |
+| **Source of evidence**   | **Summary of the association**   | **Bias due to study limitations** | **Bias due to reporting bias** | **Bias due to indirectedness**   | **Bias due to other reasons** | |
+Exercise intervention vs comparison group | n = 9 , k = 700 , SMD = -0.08, 95%CI: -0.24, 0.07 | Overall, five studies were rated as high, three studies as some concerns, and one was rated as low risk of bias. High risk of bias due to to deviations from intended intervention, missing outcome data, and selection of reported results.| Two studies rated as high risk of bias  | *what here* | Lack of blinding of participants and outcomes assessors. | 
+
