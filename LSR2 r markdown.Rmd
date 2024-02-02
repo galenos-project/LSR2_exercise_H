@@ -54,6 +54,7 @@ data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth201
 LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2018"] <- "Whitworth2019a"
 LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2019"] <- "Whitworth2019b"
 
+
 #add ROB variable "high" (no = low/some concerns; yes = high)
 data_2023_12_4_LSR2_Awks2$high <- c("no", "yes" , "no" , "yes" , "no" , "yes" , "yes", "yes" , "yes")
 
@@ -61,14 +62,13 @@ data_2023_12_4_LSR2_Awks2$high <- c("no", "yes" , "no" , "yes" , "no" , "yes" , 
 data.rob.sens = subset(data_2023_12_4_LSR2_Awks2, high == "no")
 
 ```
-
 # Results
 
 ## Flow of Study Selection and Descriptives
 
-We identified *number of records* records. The PRISMA flow chart describing the inclusion process is presented in Figure 1. A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.
+We identified *number of records* records. The PRISMA flow chart describing the inclusion process is presented in Figure 1. A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.10 of the studies were RCTs, and 1 was a crossover RCT *reference*.
 
-`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses *references*. Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` studies *references*, which have been synthesized without an accompanying meta-analysis. 10 of the studies were RCTs, and 1 was a crossover RCT *reference*. Three of the studies provided follow-up PTSD outcome data which was insufficient for synthesis *reference*.
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses *references*. Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` studies *references*, which have been synthesized without an accompanying meta-analysis.  Three of the studies provided follow-up PTSD outcome data which was insufficient for synthesis *reference*.
 
 Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis are summarized in Table 1. From these `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies, there were `r length(table(data_2023_12_4_LSR2_Awks2$study))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups *reference*. One of the first authors published findings from two different but methodically similar trials in the same year *reference*.
 
@@ -284,7 +284,7 @@ The meta-analysis found no evidence of a difference in treatment dropout between
 
 ### Sensitivity Analyses
 
-We examine the robustness of the findings for the primary outcome by excluding studies with high risk of bias.`r length(table(data.rob.sens$study))` studies were rated as low or some concerns 
+We examine the robustness of the findings for the primary outcome by excluding studies with high risk of bias.`r length(table(data.rob.sens$study))` studies were rated as low or some concerns. 
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 #SUMMARIZE the SMDs from studies using metacont & POOL the data 
@@ -333,7 +333,9 @@ forest(subgroup.rob,
        fs.study = 10, ff.study = "italic",
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
+
 ```
+
  **Figure 8:** Sub-group analysis of the effects of exercise on PTSD symptom severity by risk of bias rating.
 
 There was no significant difference in PTSD symptom severity between studies rated as low or some concerns compared to those rated with a high risk of bias  (see Figure 8).
@@ -368,5 +370,5 @@ The primary outcome was efficacy in reducing overall PTSD symptom severity in pa
 |                          |                                  |                                   |                                |                                  |                               |
 |------------|------------|------------|------------|------------|------------|
 | **Source of evidence**   | **Summary of the association**   | **Bias due to study limitations** | **Bias due to reporting bias** | **Bias due to indirectedness**   | **Bias due to other reasons** | |
-Exercise intervention vs comparison group | n = 9 , k = 700 , SMD = -0.08, 95%CI: -0.24, 0.07 | Overall, five studies were rated as high, three studies as some concerns, and one was rated as low risk of bias. High risk of bias due to to deviations from intended intervention, missing outcome data, and selection of reported results.| Two studies rated as high risk of bias  | *what here* | Lack of blinding of participants and outcomes assessors. | 
+Exercise intervention vs comparison group | n = 9 , k = 700 , SMD = -0.08, 95%CI: -0.24, 0.07 | Overall, five studies were rated as high, three studies as some concerns, and one was rated as low risk of bias. High risk of bias due to to deviations from intended intervention, missing outcome data, and selection of reported results.| Two studies rated as high risk of bias  | *what here* | Lack of blinding of participants and outcomes assessors. |              |------------|------------|------------|------------|------------|------------| |
 
