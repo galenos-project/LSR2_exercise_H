@@ -10,6 +10,7 @@ output:
 ---
 
 ```{r  setup, error=FALSE, warning=FALSE, message=FALSE, include=FALSE}
+
 #Load package 'meta' to run meta-analyses.
 library(meta)
 library(tidyr)
@@ -38,6 +39,8 @@ load("data/LSR2weeksStata2insufdata.RData")
 load("data/LSR2_studychartab_wks_140124.RData")
 load("data/LSR2_studychartab_insuf_140124.RData")
 
+load("data/LSR2_interventions_150224.RData")
+
 ## prisma<-read.csv("data/LSR3_H_PRISMA_2024.01.23.csv") #csv file for the prisma2020 -->
 ## prisma<-PRISMA_data(prisma) 
 
@@ -46,14 +49,6 @@ rob<-read_xlsx("data/LSR2_robptsd_260124.xlsx")
 
 #Round off results to two digits
 settings.meta(digits = 2)
-
-#update study names for Whitworth pilot and main studies
-data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2018"] <- "Whitworth2019a"
-data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2019"] <- "Whitworth2019b"
-
-LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2018"] <- "Whitworth2019a"
-LSR2_studychartab_wks_140124$Study[LSR2_studychartab_wks_140124$Study == "Whitworth2019"] <- "Whitworth2019b"
-
 
 #add ROB variable "high" (no = low/some concerns; yes = high)
 data_2023_12_4_LSR2_Awks2$high <- c("no", "yes" , "no" , "yes" , "no" , "yes" , "yes", "yes" , "yes")
@@ -66,15 +61,16 @@ data.rob.sens = subset(data_2023_12_4_LSR2_Awks2, high == "no")
 
 ## Flow of Study Selection and Descriptives
 
-We identified *number of records* records. The PRISMA flow chart describing the inclusion process is presented in Figure 1. A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.10 of the studies were RCTs, and 1 was a crossover RCT *reference*.
+We identified *number of records* records. See Figure 1 for the PRISMA flow diagram. A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.10 of the studies were RCTs, and 1 was a crossover RCT *reference*.
 
-`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses *references*. Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` studies *references*, which have been synthesized without an accompanying meta-analysis.  Three of the studies provided follow-up PTSD outcome data which was insufficient for synthesis *reference*.
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses *references*. Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies *references*.These were synthesized without an accompanying meta-analysis. Three of the studies provided follow-up PTSD outcome data which were insufficient for synthesis *reference*.
 
 Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis are summarized in Table 1. From these `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies, there were `r length(table(data_2023_12_4_LSR2_Awks2$study))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups *reference*. One of the first authors published findings from two different but methodically similar trials in the same year *reference*.
 
 ```{r echo=FALSE}
 knitr::kable(LSR2_studychartab_wks_140124[, 1:13], "pipe")
 ```
+*Aerobic exercise = physical performance behaviour pattern that increases heart rate and respiration while using large muscle groups repetitively and rhythmically; anaerobic exercise = physical performance behaviour pattern that is performed in short intense bursts with limited oxygen intake; mixed exercise  = combination of aerobic and anaerobic exercise. CAPS-IV = Clinician-Administered PTSD Scale - 4th edition; PCL-4 = PTSD Checklist - version 4; PCL-5 = PTSD Checklist version 5; HTQ = Harvard Trauma Questionnaire. TAU = treatment as usual.*
 
 **Table 1:** Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis.
 
@@ -83,8 +79,19 @@ Study characteristics of the `r length(table(LSR2weeksStata2insufdata$studyN))` 
 ```{r echo=FALSE}
 knitr::kable(LSR2_studychartab_insuf_140124[, 1:10], "pipe")
 ```
+*Aerobic exercise = physical performance behaviour pattern that increases heart rate and respiration while using large muscle groups repetitively and rhythmically; anaerobic exercise = physical performance behaviour pattern that is performed in short intense bursts with limited oxygen intake; mixed exercise  = combination of aerobic and anaerobic exercise.*
 
 **Table 2:** Study characteristics of the `r length(table(LSR2weeksStata2insufdata$studyN))` studies not included in the meta-analysis.
+
+
+The specific intervention and comparison groups for the included studies `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))`(`r length(table(LSR2_interventions_150224$study))` comparisons) are presented in table 3. 
+
+```{r echo=FALSE}
+knitr::kable(LSR2_interventions_150224[, 1:7], "pipe")
+```
+
+**Table 3:** Specific interventions for all the included studies
+
 
 <!-- TO ADD: 
 
@@ -143,7 +150,7 @@ Low heterogeneity was found as suggested by the prediction interval which is onl
 
 #### Subgroup Analyses and Meta-regressions 
 
-We explore whether heterogeneity could be potentially explained by differences in study-level characteristics using subgroup analyses and meta-regression  below. The following characteristics were explored as sources of heterogeneity for the primary outcome, PTSD symptom severity:
+We explored whether heterogeneity could be potentially explained by differences in study-level characteristics using subgroup analyses and meta-regression  below. The following characteristics were explored as sources of heterogeneity for the primary outcome, PTSD symptom severity:
 
 -   Exercise intensity (moderate intensity vs high intensity)
 
@@ -344,7 +351,7 @@ There was no significant difference in PTSD symptom severity between studies rat
 
 ### Reporting bias
 
-The forest plot below show the meta-analysis results of the primary outcome ordered by precision of the studies (i.e. standard error of the effects). It seems that the smaller studies showed larger effects favouring the intervention.
+The forest plot below show the meta-analysis results of the primary outcome ordered by precision of the studies. It seems that the smaller studies showed larger effects favouring the intervention.
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 # forest polot ordered by precision
