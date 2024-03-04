@@ -1,0 +1,115 @@
+---
+title: Mechanisms through which exercise reduces symptom severity and/or functional impairment in posttraumatic stress disorder (PTSD) - Research question II
+author: Virginia Chiocchia
+date: "`r format(Sys.Date(), '%d %b %Y')`"
+output: html_notebook
+mainfont: Arial
+---
+
+```{r setup,message=F,warning=F,echo=F,include=F}
+
+### libraries
+library(meta)
+library(tidyr)
+library(tibble)
+library(stringr)
+library(readxl)
+library(grid)
+library(dplyr)
+library(rjags)
+library(Matrix)
+library(knitr)
+library(kableExtra)
+library(rms) 
+library(meta)
+library(devtools)
+library(dosresmeta)
+library(tools)
+library(metafor)
+library(rje)
+library(gtools)
+
+
+load("data/data_2023-12-4_LSR2_Awks2.RData")
+load("data/LSR2weeksStata2insufdata.RData")
+
+load("data/LSR2_studychartab_wks_140124.RData")
+load("data/LSR2_studychartab_insuf_140124.RData")
+
+load("data/LSR2_interventions_150224.RData")
+
+
+```
+
+# Results
+
+## Flow of study selection and descriptives
+
+The flow of study selection is shown in Figure 1 (*to be included*). We examined potential mediators affecting the relationship between the *intervention* and the *outcome(s),* as shown in Figure 2*.* Overall, `r length(table(LSR2_mediators$study))` studies reported data on association between *intervention* and the *outcome(s):*
+
+-   `r ###` studies reported data on *mediator 1*
+
+-   `r ###` studies reported data on *mediator 2*
+
+-   ...
+
+The earliest studies were performed in `r ###` while the most recent studies were performed in `r ###`
+
+The median sample size across the studies was `r ###` participants per arm. The median of the mean participant age was `r ###` years (ranged from `r ###` to `r ###` years).
+
+*Include DAG(s) for relevant mediators*
+
+![*Fig.2 Example of a mediation of the effect of exercise on improving PTSD symptoms via changing the levels of BDNF. The indirect effect of exercise on the outcome A~Indirect~ is obtained as the product of B and C effect sizes. The direct effect A~Direct~ would typically not be reported in studies; instead, the total effect A~Total~= A~Direct~ +A~Indirect~ is reported.*](Picture%201.png){width="15cm"}
+
+### Descriptive associations
+
+In total, `r ###` studies only reported the associations descriptively.
+
+*Add the reported statements about associations.*
+
+### Mediation analysis
+
+In total, `r ###` studies performed proper mediation analysis and reported the following indirect and direct effects for the mediators.
+
+```{r,echo=F }
+
+# maybe better if dataset is in long format (if studies have more than one mediators)
+kable(LSR2_mediators %>% select(study, mediator, Atotal, 
+                                Aindirect, Adirect),
+      digits = 0,
+      caption = "Table 1: Mediators, direct and indirect effects for the included studies",
+      col.names = c("Study","Mediator/Mechanism",
+                    "Total Effect Intervention Outcome",
+                    "Indirect Effect Intervention Outcome", 
+                    "Direct Effect Intervention Outcome")) %>%
+  footnote() %>%
+  kable_paper("striped", full_width = F) #%>%
+  #scroll_box(width = "500px", height = "200px") 
+
+  
+```
+
+| Study | Mediator/Mechanism | Total Effect | Indirect Effect | Direct Effect |
+|-------|--------------------|--------------|-----------------|---------------|
+|       |                    |              |                 |               |
+|       |                    |              |                 |               |
+
+## Synthesis of mediator(s) estimates
+
+*If relevant add results from appropriate methodology as described in protocol.*
+
+### Sensitivity analyses
+
+*Add any if relevant*
+
+### Subgroup analyses
+
+*Add any if relevant*
+
+## Risk of bias assessment
+
+...
+
+## Summary of evidence on mediators
+
+...

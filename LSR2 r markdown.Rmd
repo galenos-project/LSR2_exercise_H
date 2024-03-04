@@ -1,6 +1,6 @@
 ---
 title: Mechanisms through which exercise reduces symptom severity and/or functional impairment in posttraumatic stress disorder (PTSD)
-author: "Simonne Wright, Virginia Chiocchia, Georgia Salanti <span style='font-size: 15px'></style>"
+author: Simonne Wright, Virginia Chiocchia, Georgia Salanti
 date: "`r format(Sys.Date(), '%d %B %Y')`"
 output: 
  html_document:
