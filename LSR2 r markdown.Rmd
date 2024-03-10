@@ -29,8 +29,9 @@ library(metafor)
 library(gtools)
 library(metasens)
 library(robvis)
+library(PRISMA2020)
 
-#setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
+setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
 
 load("data/data_2023-12-4_LSR2_Awks2.RData")
 load("data/LSR2weeksStata2insufdata.RData")
@@ -45,6 +46,9 @@ load("data/LSR2_interventions_150224.RData")
 
 #risk of bias data
 rob <- read_xlsx("data/LSR2_robptsd_260124.xlsx")
+
+#risk of bias data
+prisma <- read_xlsx("data/LSR2_H_PRISMA_100344.xlsx")
 
 #Round off results to two digits
 settings.meta(digits = 2)
@@ -63,6 +67,9 @@ data.rob.sens = subset(data_2023_12_4_LSR2_Awks2, high == "no")
 
 We identified *number of records* records. See Figure 1 for the PRISMA flow diagram. A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.
 
+```{r echo=F, fig.fullwidth=T, fig.width=12, fig.height=8}
+PRISMA_flowdiagram(prisma, previous = FALSE, other=TRUE)
+```
 *prisma diagram*
 
 **Figure 1:** PRISMA flow diagram
