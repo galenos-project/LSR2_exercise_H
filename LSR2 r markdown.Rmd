@@ -47,9 +47,12 @@ load("data/LSR2_interventions_150224.RData")
 #risk of bias data
 rob <- read_xlsx("data/LSR2_robptsd_260124.xlsx")
 
-#risk of bias data
+#PRISMA data
 prisma <- read_xlsx("data/LSR2_H_PRISMA_100344.xlsx")
 prisma<-PRISMA_data(prisma)
+
+#SoE data
+LSR2_SoE_250324 <- read_xlsx("data/LSR2_SoE_250324.xlsx")
 
 #Round off results to two digits
 settings.meta(digits = 2)
@@ -59,6 +62,8 @@ data_2023_12_4_LSR2_Awks2$high <- c("no", "yes" , "no" , "yes" , "no" , "yes" , 
 
 #create subset for ROB sensitivity analysis: select studies with treatments "OLA" and "PLA"
 data.rob.sens = subset(data_2023_12_4_LSR2_Awks2, high == "no")
+
+
 
 ```
 
@@ -118,7 +123,7 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 **Figure 2** Results of the risk of bias assessment per domain and overall
 
-###Risk of bias for the mediation studies
+### Risk of bias for the mediation studies
 *insert*
 
 ## Research question I
@@ -127,7 +132,7 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 For the studies included in the meta-analyses, the earliest study was performed in `r format(min((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`, while the most recent study was performed in `r format(max((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`. The median sample size across the studies was `r round(median(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((data_2023_12_4_LSR2_Awks2$AGEm), na.rm=T))` years (ranging from `r round(min((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` to `r round(max((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` years).
 
-####Post-intervention (weeks)
+#### Post-intervention (weeks)
 `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for PTSD symptom severity and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1PTSD3PTm)` effect measures to the PTSD symptom severity meta-analysis. The summary for PTSD symptom severity is shown in Figure 3.
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
@@ -366,7 +371,7 @@ Only one study reported data on loss of PTSD diagnosis post-intervention (Vooren
 
 Three studies examined putative mediators, but the available data was insufficient to carry out a meta-analysis (Crombie et al., 2021a; Powers et al., 2015; Whitworth et al., 2019a).
 
-###Synthesis Without Meta-analysis
+### Synthesis Without Meta-analysis
 
 In the first study, 35 participants were randomized to a 3-day protocol involving fear acquisition, extinction, and recall. They examined whether exercise-induced increases in circulating concentrations of candidate biomarkers mediated the effects of exercise on threat expectancy ratings during the extinction recall phase (Crombie et al., 2021a). Biomarkers included Brain-derived neurotrophic factor (BDNF), Anandamide (AEA), 2-arachidonoylglycerol (2-AG), and Homovanillic acid (HVA). 
 Threat expectancy ratings evaluate an individual's anticipation levels toward encountering threatening situations. Individuals with PTSD often exhibit elevated ratings. Decreasing these anticipations may lead to a reduction in the severity of PTSD symptoms. For the total effect, the exercise group exhibited lower threat expectancy ratings following reinstatement than the comparison group (d = 0.75). Circulating concentrations of BDNF (95% CI for the indirect effect, path ab: -0.941, -0.005) and AEA (95% CI for the indirect effect, path ab: -0.623, -0.005) following exercise mediated the relationship between exercise and reduced threat expectancy ratings following reinstatement. 2-AG (95% CI for the indirect effect, path ab: -0.050, -0.210) and HVA (95% CI for the indirect effect, path ab: -0.190, -0.134) did not reach statistical significance. 
@@ -377,7 +382,8 @@ The third study examined whether changes in cognitive appraisal, perceived exert
 
 The primary outcome was efficacy in reducing overall PTSD symptom severity in patients with PTSD. The summary of the evidence on PTSD symptom severity outcome for PTSD is reported below.
 
-                                       |                                                   |                                                                                                                                                                                                                                              |                                        |                                  |                                                          |
-|------------|------------|------------|------------|------------|------------|
-| **Source of evidence**                    | **Summary of the association**                    | **Bias due to study limitations**                                                                                                                                                                                                            | **Bias due to reporting bias**         | **Bias due to indirectedness**   | **Bias due to other reasons**                            |
-| Exercise intervention vs comparison group | n = 9 , k = 700 , SMD = -0.08, 95%CI: -0.24, 0.07 | Overall, five studies were rated as high, three studies as some concerns, and one was rated as low risk of bias. High risk of bias due to to deviations from intended intervention, missing outcome data, and selection of reported results. | Two studies rated as high risk of bias | *what here*                      | Lack of blinding of participants and outcomes assessors. |
+
+```{r echo=FALSE}
+knitr::kable(LSR2_SoE_250324[, 1:6])
+```
+
