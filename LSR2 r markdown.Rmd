@@ -111,7 +111,7 @@ knitr::kable(LSR2_interventions_150224[, 1:7], "pipe")
 **Table 3:** Specific interventions for all the included studies
 
 ## Risk of bias assessment
-###Risk of bias for the PTSD symptom severity outcome
+### Risk of bias for the PTSD symptom severity outcome
 
 The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2 of the Extended Data. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
 
