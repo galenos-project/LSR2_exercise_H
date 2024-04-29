@@ -31,7 +31,7 @@ library(metasens)
 library(robvis)
 library(PRISMA2020)
 
-setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
+#setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
 
 load("data/data_2023-12-4_LSR2_Awks2.RData")
 load("data/LSR2weeksStata2insufdata.RData")
@@ -69,14 +69,17 @@ LSR2_interventions_150224$Study[LSR2_interventions_150224$Study == "Whitworth201
 ```
 
 # Results
+
 We identified 11870 records. The PRISMA flow diagram is presented (Extended data). A total of `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies with data from `r sum(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T)+ sum(LSR2weeksStata2insufdata$totNrandom, na.rm=T)` participants were eligible for inclusion.The additional texts included secondary analyses, abstracts, trial registries, and protocol papers.
 
 ```{r echo=F, warning=F, fig.fullwidth=T, fig.width=12, fig.height=8}
 PRISMA_flowdiagram(prisma, previous = FALSE, other=FALSE)
 ```
+
 **Figure 1:** PRISMA flow diagram
 
-## Study description 
+## Study description
+
 10 of the studies were RCTs, and 1 was a crossover RCT (Greene & Petruzzello, 2022).The specific intervention and comparison groups for the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` eligible studies (`r length(table(data_2023_12_4_LSR2_Awks2$study))+length(table(LSR2weeksStata2insufdata$study))` comparisons) are presented in Table 1.
 
 ```{r echo=FALSE}
@@ -89,7 +92,8 @@ knitr::kable(LSR2_interventions_150224[, 1:7], "pipe")
 
 `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` of the `r  length(table(data_2023_12_4_LSR2_Awks2$studyN)) + length(table(LSR2weeksStata2insufdata$studyN))` studies were included in the meta-analyses (Bryant et al., 2023; Huseth, 2021; Nordbrandt et al., 2020; Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b; Young-McCaughan et al., 2022). Meta-analysis was not feasible for `r length(table(LSR2weeksStata2insufdata$studyN))` of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))+length(table(LSR2weeksStata2insufdata$studyN))` studies (Crombie et al., 2021a; Greene & Petruzzello, 2022; Powers et al., 2015). Three of the studies provided follow-up PTSD outcome data which were insufficient for synthesis, which were synthesized descriptively without meta-analysis (Crombie et al., 2021a; Greene & Petruzzello, 2022; Powers et al., 2015). Three studies examined putative mediators which was not sufficient to carry out a meta-analysis (Crombie et al., 2021a; Powers et al., 2015; Whitworth et al., 2019a).
 
-Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis are are presented in Table 2. From these `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies, there were `r length(table(data_2023_12_4_LSR2_Awks2$study))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups (Young-McCaughan et al., 2022). One of the first authors published findings from two different but methodologically similar trials in the same year (Whitworth et al., 2019a; Whitworth et al., 2019b). 
+Study characteristics of the `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies included in the meta-analysis are are presented in Table 2. From these `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies, there were `r length(table(data_2023_12_4_LSR2_Awks2$study))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups (Young-McCaughan et al., 2022). One of the first authors published findings from two different but methodologically similar trials in the same year (Whitworth et al., 2019a; Whitworth et al., 2019b).
+
 ```{r echo=FALSE}
 knitr::kable(LSR2_studychartab_wks_140124[, 1:13], "pipe")
 ```
@@ -108,16 +112,15 @@ knitr::kable(LSR2_studychartab_insuf_140124[, 1:10], "pipe")
 
 **Table 3:** Study characteristics of the `r length(table(LSR2weeksStata2insufdata$studyN))` studies not included in the meta-analysis.
 
-
 ## Primary outcome
 
-### PTSD Symptom Severity 
+### PTSD Symptom Severity
 
 For the studies included in the meta-analyses, the earliest study was performed in `r format(min((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`, while the most recent study was performed in `r format(max((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`. The median sample size across the studies was `r round(median(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((data_2023_12_4_LSR2_Awks2$AGEm), na.rm=T))` years (ranging from `r round(min((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` to `r round(max((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` years).
 
 #### Post-intervention (weeks)
 
-`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for PTSD symptom severity and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1PTSD3PTm)` effect measures to the PTSD symptom severity meta-analysis. The forest plot for PTSD symptom severity is presented in Figure 2. 
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for PTSD symptom severity and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1PTSD3PTm)` effect measures to the PTSD symptom severity meta-analysis. The forest plot for PTSD symptom severity is presented in Figure 2.
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 #SUMMARIZE the SMDs from studies using metacont & POOL the data 
@@ -250,7 +253,6 @@ bubble(intervLENGTHreg, col.line = "blue")
 
 **Figure 6:** Meta-regression of the effects of exercise on PTSD symptom severity by intervention length
 
-
 #### Sensitivity Analyses
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
@@ -301,12 +303,12 @@ forest(LSR2mainMA,
 
 **Figure 8:** Forest plot of the meta-analysis results of the primary outcome ordered by the precision of the studies
 
-#### Synthesis Without Meta-analysis 
+#### Synthesis Without Meta-analysis
 
 Meta-analysis could not be conducted for three studies addressing the primary outcome of PTSD symptom severity (Crombie et al., 2021a; Greene & Petruzzello, 2022; Powers et al., 2015). Two of the studies did not report outcome data for PTSD symptom severity post-intervention (Crombie et al., 2021a; Greene & Petruzzello, 2022). The third study did not provide sufficient data to include in the meta-analysis (Powers et al., 2015).\
 Powers et al. (2015) examined the efficacy of adding moderate-intensity aerobic exercise before prolonged exposure (PE) in reducing PTSD symptoms. The participants who underwent PE plus exercise experienced a greater reduction in PTSD symptoms (d = 2.65, SE = 0.92). compared to the group that received PE only. This outcome was observed after the 12-week intervention.
 
-#### Risk of bias for the PTSD symptom severity 
+#### Risk of bias for the PTSD symptom severity
 
 The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 9 of the Extended Data. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
 
@@ -318,11 +320,15 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 **Figure 9** Results of the risk of bias assessment per domain and overall for the PTSD severity outcome
 
-_____
-## Secondary outcomes 
+------------------------------------------------------------------------
+
+## Secondary outcomes
+
 ### Treatment Dropout
+
 #### Post-intervention (weeks)
-`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for treatment dropout, and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1Ndrop)` effect measures to the treatment dropout meta-analysis. The forest plot for the risk of treatment dropout presented in Figure 10. 
+
+`r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for treatment dropout, and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1Ndrop)` effect measures to the treatment dropout meta-analysis. The forest plot for the risk of treatment dropout presented in Figure 10.
 
 ```{r echo=F, fig.fullwidth=T, fig.width=11, fig.height=4}
 #Summarize the study-specific risk ratios for study completors from studies using metabin
@@ -347,22 +353,28 @@ forest(pooledRRdrop,
 
 ```
 
-**Figure 10:** Meta-analysis of the dropout rates between the intervention and control groups 
+**Figure 10:** Meta-analysis of the dropout rates between the intervention and control groups
 
 There is no evidence of a difference in treatment dropout between exercise and comparison groups (`r paste0(pooledRRdrop$sm, " = ", round(exp(pooledRRdrop$TE.random), 2), ", 95% CI ", round(exp(pooledRRdrop$lower.random), 2), " to ", round(exp(pooledRRdrop$upper.random), 2))`) and there is large heterogeneity, as shown by the prediction interval (`r paste(round(exp(pooledRRdrop$lower.predict), 2), "to", round(exp(pooledRRdrop$upper.predict), 2))`).
 
 ------------------------------------------------------------------------
+
 ### PTSD symptom clusters
+
 #### Synthesis without meta-analysis
-2 of the 11 studies examined the effects of exercise on PTSD symptom clusters, namely, avoidance, reexperiencing, hyperarousal, as well as negative cognitions and mood (Whitworth et al., 2019a; Whitworth et al., 2019b). One study reported significantly lower levels of avoidance symptoms (F(1, 20) = 8.50, p=.009, d=1.26, 95% CI [0.39, 2.14] and hyperarousal symptoms (F(1, 20) = 4.41, p = .049, d = 0.90, 95% CI [0.06, 1.74]) in the exercise group relative to the control group post-intervention (Whitworth et al., 2019a). While intrusion, F(1,20) = 2.48, p = .131, d = 0.67, 95% CI [−0.15, 1.49]; and mood and cognitive symptoms F(1, 20) = 0.65, p = .442, d = 0.34, 95% CI [−0.47, 1.14] did not differ significantly (Whitworth et al., 2019a).
-The other study found no significant between-group differences for intrusion (F(1, 17) < 0.01, p=0.98), avoidance (F(1, 17) = 0.63, p = 0.49), mood and cognitive symptoms (F(1, 17) = 0.02, p=0.91), and hyperarousal symptoms (F(1, 17) = 0.21, p = 0.67) between the exercise and comparison group (Whitworth et al., 2019b)
+
+2 of the 11 studies examined the effects of exercise on PTSD symptom clusters, namely, avoidance, reexperiencing, hyperarousal, as well as negative cognitions and mood (Whitworth et al., 2019a; Whitworth et al., 2019b). One study reported significantly lower levels of avoidance symptoms (F(1, 20) = 8.50, p=.009, d=1.26, 95% CI [0.39, 2.14] and hyperarousal symptoms (F(1, 20) = 4.41, p = .049, d = 0.90, 95% CI [0.06, 1.74]) in the exercise group relative to the control group post-intervention (Whitworth et al., 2019a). While intrusion, F(1,20) = 2.48, p = .131, d = 0.67, 95% CI [−0.15, 1.49]; and mood and cognitive symptoms F(1, 20) = 0.65, p = .442, d = 0.34, 95% CI [−0.47, 1.14] did not differ significantly (Whitworth et al., 2019a). The other study found no significant between-group differences for intrusion (F(1, 17) \< 0.01, p=0.98), avoidance (F(1, 17) = 0.63, p = 0.49), mood and cognitive symptoms (F(1, 17) = 0.02, p=0.91), and hyperarousal symptoms (F(1, 17) = 0.21, p = 0.67) between the exercise and comparison group (Whitworth et al., 2019b)
 
 ### Functional impairment
+
 #### Synthesis without meta-analysis
+
 Two of the studies examined the effects of exercise on functional impairment post-intervention indices (Nordbrandt et al., 2020; Voorendonk et al., 2023). One study reported small significant improvement over time for Quality of life evaluated (mean difference (SE) = 9.68 (2.79), p = .0005)(Topp et al., 2015), Global Assessment of Functioning for Symptom (mean difference (SE) = 4.37 (1.34), p = .0011)(Bastin et al., 2013), as well as level of functioning (mean difference (SE) =-2.54 (0.86), p = .0032)(Sheehan & Sheehan, 2008) for the exercise group (Nordbrandt et al., 2020). However, no significant difference over time was found for the Global Assessment of Functioning for Function (mean difference (SE) = 3.64 (1.31), p = .05990) (Bastin et al., 2013) in the exercise group (Nordbrandt et al., 2020). While most variables showed significant improvement in rating scores over time in both the exercise and comparison group, no significant between-group differences were found at the pre- or post-intervention assessments. The other study reported a large significant increase in quality of life (Priebe et al., 1999) in both the exercise and comparison groups, and also found no significant between group differences (Voorendonk et al., 2023).
 
 ### Loss of PTSD diagnosis
+
 #### Synthesis without meta-analysis
+
 Only one study reported data on loss of PTSD diagnosis post-intervention (Voorendonk et al., 2023). Loss of diagnosis was high in both the exercise and comparison groups. More specifically, 80.0% and 82.7% of the intervention and comparison groups respectively no longer met the diagnostic criteria for PTSD. The between-group difference was non-significant (p = 0.721).
 
 ## Mechanistic insights
@@ -374,16 +386,17 @@ Three studies examined putative mediators, but the available data was insufficie
 In the first study, 35 participants were randomized to a 3-day protocol involving fear acquisition, extinction, and recall. They examined whether exercise-induced increases in circulating concentrations of candidate biomarkers mediated the effects of exercise on threat expectancy ratings during the extinction recall phase (Crombie et al., 2021a). Biomarkers included Brain-derived neurotrophic factor (BDNF), Anandamide (AEA), 2-arachidonoylglycerol (2-AG), and Homovanillic acid (HVA). Threat expectancy ratings evaluate an individual's anticipation levels toward encountering threatening situations. Individuals with PTSD often exhibit elevated ratings. Decreasing these anticipations may lead to a reduction in the severity of PTSD symptoms. For the total effect, the exercise group exhibited lower threat expectancy ratings following reinstatement than the comparison group (d = 0.75). Circulating concentrations of BDNF (95% CI for the indirect effect, path ab: -0.941, -0.005) and AEA (95% CI for the indirect effect, path ab: -0.623, -0.005) following exercise mediated the relationship between exercise and reduced threat expectancy ratings following reinstatement. 2-AG (95% CI for the indirect effect, path ab: -0.050, -0.210) and HVA (95% CI for the indirect effect, path ab: -0.190, -0.134) did not reach statistical significance. The second study examined BDNF levels as a potential mediator of the relationship between exercise and PTSD symptom severity (Powers et al., 2015). Post-intervention, the exercise group experienced a significant increase in circulating concentrations of BDNF (d = 1.08). in addition to greater reduction in PTSD symptoms compared to the comparison group. The third study examined whether changes in cognitive appraisal, perceived exertion, affect, arousal, and distress in a sample of 22 adults with PTSD predicted changes in PTSD symptoms (Whitworth et al., 2019a). They found changes in the perception of the resistance training sessions (cognitive appraisal; b = 7.1, SE = 2.9, p = .02) and perceived exertion (b = -3.1, SE = 1.2, p = .01) significantly mediated the relationship between exercise and PTSD symptom severity. Affect (b = 0.82, SE = 1.7, p = .63), arousal (b = 2.4, SE = 1.5, p = .12), and distress (b = 0.18, SE = .13, p = .17) did not reach statistical significance. This outcome was observed at the conclusion of the 3-week intervention.
 
 #### Risk of bias for the mediation studies
-The results of the risk of bias assessment for the mediation analyses are presented in Figure 11. Even though two of the three mediation studies had only some concerns within the non-mediation-specific (D1-D5) components of the revised ROB2 tool (Crombie et al.,2021a; Powers et al., 2015), all of the three studies had an overall high risk of bias mainly due to the deviations in mediation-specific domains (D6-D9) (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019). In the domains (D7 and D8), 100% of the mediation studies had a high risk of bias underscoring the current methodological limitation in mediation analysis and handling confounding in mediation studies (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019). 
 
+The results of the risk of bias assessment for the mediation analyses are presented in Figure 11. Even though two of the three mediation studies had only some concerns within the non-mediation-specific (D1-D5) components of the revised ROB2 tool (Crombie et al.,2021a; Powers et al., 2015), all of the three studies had an overall high risk of bias mainly due to the deviations in mediation-specific domains (D6-D9) (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019). In the domains (D7 and D8), 100% of the mediation studies had a high risk of bias underscoring the current methodological limitation in mediation analysis and handling confounding in mediation studies (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019).
 
 ```{r echo=FALSE}
 library(knitr)
 include_graphics("data/robmedfig.png")
 ```
-**Figure 11** Results of the risk of bias assessment per domain and overall for the mediation outcomes 
 
-# SUMMARY OF THE EVIDENCE 
+**Figure 11** Results of the risk of bias assessment per domain and overall for the mediation outcomes
+
+# SUMMARY OF THE EVIDENCE
 
 The primary outcome was efficacy in reducing overall PTSD symptom severity in patients with PTSD. The summary of the evidence on PTSD symptom severity outcome for PTSD is reported below.
 
