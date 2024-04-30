@@ -66,6 +66,9 @@ data.rob.sens = subset(data_2023_12_4_LSR2_Awks2, high == "no")
 LSR2_interventions_150224$Study[LSR2_interventions_150224$Study == "Whitworth2018"] <- "Whitworth2019a"
 LSR2_interventions_150224$Study[LSR2_interventions_150224$Study == "Whitworth2019"] <- "Whitworth2019b"
 
+data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2018"] <- "Whitworth2019a"
+data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2019"] <- "Whitworth2019b"
+
 ```
 
 # Results
