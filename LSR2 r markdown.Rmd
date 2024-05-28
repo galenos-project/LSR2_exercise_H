@@ -1,6 +1,6 @@
 ---
 title: Mechanisms through which exercise reduces symptom severity and/or functional impairment in posttraumatic stress disorder (PTSD)
-author: Simonne Wright, Virginia Chiocchia, Georgia Salanti
+author: Simonne Wright, Virginia Chiocchia
 date: "`r format(Sys.Date(), '%d %B %Y')`"
 output: 
  html_document:
@@ -160,7 +160,7 @@ We explored whether heterogeneity could be potentially explained by differences 
 
 -   Intervention length (weeks)
 
-#### Subgroup analysis by exercise intensity
+##### Subgroup analysis by exercise intensity
 
 There was no significant difference in PTSD symptom severity between studies with moderate intensity and those with high intensity exercise groups (see Figure 3). However, visual inspection of the forest plot suggests the effect is larger in the high intensity exercise subgroup.
 
@@ -184,7 +184,7 @@ forest(subgroup.intensity,
 
 **Figure 3:** Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise intensity
 
-#### Subgroup analysis by specific exercise type
+##### Subgroup analysis by specific exercise type
 
 The were no significant difference in PTSD symptom severity between studies of aerobic exercise, anaerobic exercise, or mixed (see Figure 4).
 
@@ -209,7 +209,7 @@ forest(subgroup.tg1specEX,
 
 **Figure 4:** Sub-group analysis of the effects of exercise on PTSD symptom severity by specific exercise type
 
-#### Subgroup analysis by exercise alone or tau/therapy augmented by exercise.
+##### Subgroup analysis by exercise alone or tau/therapy augmented by exercise.
 
 There was no significant difference in PTSD symptom severity outcome between studies of exercise alone and therapy/TAU augmented by exercise (see Figure 5). However, visual inspection of the forest plot suggests the effect is larger for exercise alone compared with an inactive comparison group than for the studies that augmented psychotherapy and TAU with exercise.
 
@@ -234,7 +234,7 @@ forest(subgroup.EXEaug,
 
 **Figure 5:** Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise alone or TAU/therapy augmented by exercise
 
-#### Meta-regression by intervention length
+##### Meta-regression by intervention length
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 
@@ -255,6 +255,23 @@ bubble(intervLENGTHreg, col.line = "blue")
 ```
 
 **Figure 6:** Meta-regression of the effects of exercise on PTSD symptom severity by intervention length
+
+##### **Heterogeneity explained by covariates**
+
+|       Moderator       |          Category          |                     $\beta$                     |                                                  95% CI                                                  |                  𝞽^2^                   |
+|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+|    Overall effect     |            *-*             |       `r round(LSR2mainMA$TE.random, 2)`        |              `r round(LSR2mainMA$lower.random, 2)` to `r round(LSR2mainMA$upper.random, 2)`              |       `r round(LSR2mainMA$tau2)`        |
+|  Exercise intensity   |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
+|                       |         *Moderate*         | `r round(subgroup.intensity$TE.random.w[2], 2)` | `r round(subgroup.intensity$lower.random.w[2], 2)` to `r round(subgroup.intensity$upper.random.w[2], 2)` | `r round(subgroup.intensity$tau2.w[2])` |
+|                       |           *High*           | `r round(subgroup.intensity$TE.random.w[1], 2)` | `r round(subgroup.intensity$lower.random.w[1], 2)` to `r round(subgroup.intensity$upper.random.w[1], 2)` | `r round(subgroup.intensity$tau2.w[1])` |
+|     Exercise type     |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
+|                       |         *Aerobic*          | `r round(subgroup.tg1specEX$TE.random.w[1], 2)` | `r round(subgroup.tg1specEX$lower.random.w[1], 2)` to `r round(subgroup.tg1specEX$upper.random.w[1], 2)` | `r round(subgroup.tg1specEX$tau2.w[1])` |
+|                       |        *Anaerobic*         | `r round(subgroup.tg1specEX$TE.random.w[3], 2)` | `r round(subgroup.tg1specEX$lower.random.w[3], 2)` to `r round(subgroup.tg1specEX$upper.random.w[3], 2)` | `r round(subgroup.tg1specEX$tau2.w[3])` |
+|                       |          *Mixed*           | `r round(subgroup.tg1specEX$TE.random.w[2], 2)` | `r round(subgroup.tg1specEX$lower.random.w[2], 2)` to `r round(subgroup.tg1specEX$upper.random.w[2], 2)` | `r round(subgroup.tg1specEX$tau2.w[2])` |
+| Exercise augmentation |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
+|                       |      *Exercise alone*      |  `r round(subgroup.EXEaug$TE.random.w[2], 2)`   |    `r round(subgroup.EXEaug$lower.random.w[2], 2)` to `r round(subgroup.EXEaug$upper.random.w[2], 2)`    |  `r round(subgroup.EXEaug$tau2.w[2])`   |
+|                       | *TAU/therapy + augmented*  |  `r round(subgroup.EXEaug$TE.random.w[1], 2)`   |    `r round(subgroup.EXEaug$lower.random.w[1], 2)` to `r round(subgroup.EXEaug$upper.random.w[1], 2)`    |  `r round(subgroup.EXEaug$tau2.w[1])`   |
+|  Intervention length  | *per unit (Week) increase* |     `r round(intervLENGTHreg$beta[2,], 2)`      |             `r round(intervLENGTHreg$ci.lb[2], 2)` to `r round(intervLENGTHreg$ci.ub[2], 2)`             |   `r round(intervLENGTHreg$tau2, 2)`    |
 
 #### Sensitivity Analyses
 
@@ -315,7 +332,7 @@ Powers et al. (2015) examined the efficacy of adding moderate-intensity aerobic 
 
 The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 9 of the Extended Data. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
 
-```{r echo=F, warning=F, fig.height=15}
+```{r echo=F, warning=F}
 
 rob_traffic_light(data = rob , tool = "ROB2")
 
@@ -393,7 +410,7 @@ In the first study, 35 participants were randomized to a 3-day protocol involvin
 The results of the risk of bias assessment for the mediation analyses are presented in Figure 11. Even though two of the three mediation studies had only some concerns within the non-mediation-specific (D1-D5) components of the revised ROB2 tool (Crombie et al.,2021a; Powers et al., 2015), all of the three studies had an overall high risk of bias mainly due to the deviations in mediation-specific domains (D6-D9) (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019). In the domains (D7 and D8), 100% of the mediation studies had a high risk of bias underscoring the current methodological limitation in mediation analysis and handling confounding in mediation studies (Crombie et al.,2021a; Powers et al., 2015; Whitworth et al., 2019).
 
 ```{r echo=FALSE}
-library(knitr)
+
 include_graphics("data/robmedfig.png")
 ```
 
