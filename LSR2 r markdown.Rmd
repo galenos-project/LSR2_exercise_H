@@ -1,6 +1,6 @@
 ---
 title: Mechanisms through which exercise reduces symptom severity and/or functional impairment in posttraumatic stress disorder (PTSD)
-author: Simonne Wright, Virginia Chiocchia
+author: Simonne Wright, Virginia Chiocchia, Georgia Salanti
 date: "`r format(Sys.Date(), '%d %B %Y')`"
 output: 
  html_document:
@@ -131,12 +131,12 @@ LSR2mainMA = metacont(tg1PTSD3PTn , tg1PTSD3PTm ,tg1PTSD3PTsd ,tg2PTSD3PTn, tg2P
                       data = data_2023_12_4_LSR2_Awks2, studlab = study, sm = "SMD")
 
 forest(LSR2mainMA, 
-       sortvar = EXEaug,
+       sortvar = Intervention,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c("effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -169,12 +169,12 @@ subgroup.intensity = update(LSR2mainMA, subgroup = intensityEX2)
 
 # produce a forest plot
 forest(subgroup.intensity, 
-       sortvar = EXEaug,
+       sortvar = Intervention,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c( "effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -194,12 +194,12 @@ subgroup.tg1specEX = update(LSR2mainMA, subgroup = tg1specEX2)
 
 # produce a forest plot 
 forest(subgroup.tg1specEX, 
-       sortvar = EXEaug,
+       sortvar = Intervention,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c( "effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -219,12 +219,12 @@ subgroup.EXEaug = update(LSR2mainMA, subgroup = EXEaug2)
 
 # produce a forest plot using the JAMA layout.
 forest(subgroup.EXEaug, 
-       sortvar = EXEaug,
+       sortvar = Intervention,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c( "effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -250,7 +250,7 @@ Overall, there is no evidence that the intervention length affected the treatmen
 
 # generate a bubble plot. 
 
-bubble(intervLENGTHreg, col.line = "blue") 
+bubble(intervLENGTHreg, col.line = "blue", xlab = "Intervention Length (Weeks)") 
 
 ```
 
@@ -289,8 +289,8 @@ forest(rob.sens.MA,
        sortvar = EXEaug,
        common = FALSE,
        print.I2.ci = T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c("effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -302,7 +302,20 @@ forest(rob.sens.MA,
 
 #### Reporting bias
 
-Small study effects were not examined because there were fewer than 10 studies available. The forest plot below shows the meta-analysis results of the primary outcome, PTSD symptom severity, ordered by the precision of the studies is presented in Figure 8. The smaller studies showed larger effects favoring the exercise groups compared to the larger studies which cluster around the line of no effect. 
+Visual inspection of the funnel plot of standard error Hedges' g suggested possible publication bias in favour the of exercise group. 
+
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=3}
+ #Produce a funnel plot 
+funnel(LSR2mainMA, pch = 16,
+       contour = c(0.9, 0.95, 0.99),
+       col.contour = c("green", "yellow", "pink")) 
+
+legend(0.25, 1.25,
+       c("0.1 > p > 0.05", "0.05 > p > 0.01", "< 0.01"),
+       fill = c("green", "yellow", "pink"), bty = "n")
+```
+
+There was insufficient studies to test for small study effect. The forest plot below shows the meta-analysis results of the primary outcome, PTSD symptom severity, ordered by the precision of the studies is presented in Figure 8. The smaller studies showed larger effects favoring the exercise groups compared to the larger studies which cluster around the line of no effect. 
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 # forest polot ordered by precision
@@ -312,8 +325,8 @@ forest(LSR2mainMA,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c("effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -323,10 +336,8 @@ forest(LSR2mainMA,
 
 **Figure 8:** Forest plot of the meta-analysis results of the primary outcome ordered by the precision of the studies
 
-#### Synthesis Without Meta-analysis
 
-Meta-analysis could not be conducted for three studies addressing the primary outcome of PTSD symptom severity (Crombie et al., 2021a; Greene & Petruzzello, 2022; Powers et al., 2015). Two of the studies did not report outcome data for PTSD symptom severity post-intervention (Crombie et al., 2021a; Greene & Petruzzello, 2022). The third study did not provide sufficient data to include in the meta-analysis (Powers et al., 2015).\
-Powers et al. (2015) examined the efficacy of adding moderate-intensity aerobic exercise before prolonged exposure (PE) in reducing PTSD symptoms. The participants who underwent PE plus exercise experienced a greater reduction in PTSD symptoms (d = 2.65). compared to the group that received PE only. This outcome was observed after the 12-week intervention.
+***add PTSD severity SWiM when finalized***
 
 #### Risk of bias for the PTSD symptom severity
 
@@ -340,8 +351,6 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 **Figure 9** Results of the risk of bias assessment per domain and overall for the PTSD severity outcome
 
-### Functional impairment
-Two studies examined the effects of exercise on functional impairment at post-intervention (Nordbrandt et al., 2020; Voorendonk et al., 2023). One of these studyies, which compared TAU (which was constituted of psychotherapy in the form of CBT and acceptance and commitment therapy) with TAU + basic body awareness therapy  and  TAU + exercise, reported small but significant improvements over time for Quality of Life (WHO-5) (mean difference (SE) = 9.68 (2.79)(Topp et al., 2015), Global Assessment of Functioning for Symptoms (GAF-S) (mean difference (SE) = 4.37 (1.34), and Disability (Sheehan Disability Scale, SDS) (mean difference (SE) =-2.54 (0.86) for the exercise + TAU group (Nordbrandt et al., 2020). However, no significant difference over time was found for the Global Assessment of Functioning for Function (GAF-F) (mean difference (SE) = 3.64 (1.31) in the exercise +TAU group (Nordbrandt et al., 2020). While there was significant improvement in rating scores over time in both the exercise + TAU and the other 2 comparison groups (psychotherapy and control), no significant between-group differences were found at the pre- or post-intervention assessments (Voorendonk et al., 2023). The other study compared a physical exercise condition (n = 59) to a non-physical activity control condition. All participants received an 8-day intensive trauma-focused therapy programme comprising daily prolonged exposure, EMDR therapy, and psychoeducation. There was a significant increase in quality of life in both the exercise and non-exercise groups, however there was no significant between-group differences (Voorendonk et al., 2023). 
 
 
 ------------------------------------------------------------------------
@@ -362,12 +371,12 @@ pooledRRdrop = metabin(tg1Ndrop, tg1Nrandom,	tg2Ndrop,tg2Nrandom,
 
 #obtain the forest plot 
 forest(pooledRRdrop, 
-       sortvar = EXEaug,
+       sortvar = Intervention,
        common = FALSE,
        print.I2.ci = T, 
        prediction=T,
-       label.left = 'Favours intervention',
-       label.right = "Favours control",
+       label.left = 'Favours exercise',
+       label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
        rightcols = c("effect", "ci"),
        fs.study = 10, ff.study = "italic",
@@ -381,26 +390,11 @@ forest(pooledRRdrop,
 
 No evidence of a difference in treatment dropout between exercise and comparison groups (`r paste0(pooledRRdrop$sm, " = ", round(exp(pooledRRdrop$TE.random), 2), ", 95% CI ", round(exp(pooledRRdrop$lower.random), 2), " to ", round(exp(pooledRRdrop$upper.random), 2))`) was found and there was large heterogeneity, as shown by the prediction interval (`r paste(round(exp(pooledRRdrop$lower.predict), 2), "to", round(exp(pooledRRdrop$upper.predict), 2))`).
 
+**add secondary outcome SWiM when finalized**
+
 ------------------------------------------------------------------------
 
-### PTSD symptom clusters
-
-Two of the 11 studies examined the effects of exercise on PTSD symptom clusters, namely avoidance, reexperiencing, hyperarousal, as well as negative cognitions and mood (Whitworth et al., 2019a; Whitworth et al., 2019b). One study reported significantly lower levels of avoidance symptoms (d = 1.26) and hyperarousal symptoms (d = 0.90) in the exercise group relative to the control group post-intervention (Whitworth et al., 2019a). While intrusion (d = 0.67) and mood and cognitive symptoms (d = 0.34) did not differ significantly (Whitworth et al., 2019a). The other study found no significant between-group differences for intrusion (F(1, 17) < 0.01), avoidance (F(1, 17) = 0.63)mood and cognitive symptoms (F(1, 17) = 0.02), and hyperarousal symptoms (F(1, 17) = 0.21) between the exercise and comparison group (Whitworth et al., 2019b).
-
-### Loss of PTSD diagnosis
-
-Only one study reported data on loss of PTSD diagnosis post-intervention (Voorendonk et al., 2023). Loss of diagnosis was high in both the exercise and comparison groups. More specifically, 80.0% and 82.7% of the intervention and comparison groups respectively no longer met the diagnostic criteria for PTSD. The between-group difference was non-significant.
-
-## Mechanistic insights
-
-Three studies examined putative mediators, but the available data was insufficient to carry out a meta-analysis (Crombie et al., 2021a; Powers et al., 2015; Whitworth et al., 2019a).
-
-#### Synthesis Without Meta-analysis
-
-In the first study, 35 participants were randomized to a 3-day protocol involving fear acquisition, extinction, and recall. They examined whether exercise-induced increases in circulating concentrations of candidate biomarkers mediated the effects of exercise on threat expectancy ratings during the extinction recall phase (Crombie et al., 2021a). Biomarkers included brain-derived neurotrophic factor (BDNF), anandamide (AEA), 2-arachidonoylglycerol (2-AG), and homovanillic acid (HVA). 
-Threat expectancy ratings evaluate an individual's anticipation levels toward encountering threatening situations. Individuals with PTSD often exhibit elevated ratings. Decreasing these anticipations may lead to a reduction in the severity of PTSD symptoms. For the total effect, the exercise group exhibited lower threat expectancy ratings following reinstatement than the comparison group (d = 0.75). Circulating concentrations of BDNF (95% CI for the indirect effect, path ab: -0.941, -0.005) and AEA (95% CI for the indirect effect, path ab: -0.623, -0.005) following exercise mediated the relationship between exercise and reduced threat expectancy ratings following reinstatement. 2-AG (95% CI for the indirect effect, path ab: -0.050, -0.210) and HVA (95% CI for the indirect effect, path ab: -0.190, -0.134) did not reach statistical significance. 
-The second study examined BDNF levels as a potential mediator of the relationship between exercise and PTSD symptom severity (Powers et al., 2015). Post-intervention, the exercise group experienced a significant increase in circulating concentrations of BDNF (d = 1.08).
-The third study examined whether changes in cognitive appraisal, perceived exertion, affect, arousal, and distress in a sample of 22 adults with PTSD predicted changes in PTSD symptoms (Whitworth et al., 2019a). They found changes in the perception of the resistance training sessions (cognitive appraisal; b = 7.1) and perceived exertion (b = -3.1) mediated the relationship between exercise and PTSD symptom severity. Affect (b = 0.82), arousal (b = 2.4), and distress (b = 0.18) did appear to have a mediating effect. These outcomes were observed at the conclusion of the 3-week intervention. 
+**add mediation studies SWiM when finalized**
 
 #### Risk of bias for the mediation studies
 
