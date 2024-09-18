@@ -31,7 +31,7 @@ library(metasens)
 library(robvis)
 library(PRISMA2020)
 
-setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
+#setwd("C:/Users/simon/Desktop/Github rep/LSR2_exercise_H/")
 
 load("data/data_2023-12-4_LSR2_Awks2.RData")
 load("data/LSR2weeksStata2insufdata.RData")
@@ -46,6 +46,7 @@ load("data/LSR2_interventions_150224.RData")
 
 #risk of bias data
 rob <- read_xlsx("data/LSR2_robptsd_260124.xlsx")
+robtot <- read_xlsx("data/robtot.xlsx")
 
 #PRISMA data
 prisma <- read_xlsx("data/LSR2_H_PRISMA_100344.xlsx")
@@ -68,6 +69,9 @@ LSR2_interventions_150224$Study[LSR2_interventions_150224$Study == "Whitworth201
 
 data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2018"] <- "Whitworth2019a"
 data_2023_12_4_LSR2_Awks2$study[data_2023_12_4_LSR2_Awks2$study == "Whitworth2019"] <- "Whitworth2019b"
+
+#add rob total to LSR2 wks dataset
+data_2023_12_4_LSR2_Awks2 <- merge(data_2023_12_4_LSR2_Awks2, robtot, by = "study", all.x = TRUE)
 
 ```
 
@@ -119,8 +123,6 @@ knitr::kable(LSR2_studychartab_insuf_140124[, 1:10], "pipe")
 
 ### PTSD Symptom Severity
 
-For the studies included in the meta-analyses, the earliest study was performed in `r format(min((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`, while the most recent study was performed in `r format(max((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`. The median sample size across the studies was `r round(median(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((data_2023_12_4_LSR2_Awks2$AGEm), na.rm=T))` years (ranging from `r round(min((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` to `r round(max((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` years). Intervention length ranged from 3 weeks to 20 weeks, with a median of 8 weeks. 
-
 #### Risk of bias for the PTSD symptom severity
 
 The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2 of the Extended Data. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
@@ -133,12 +135,13 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 **Figure 2** Results of the risk of bias assessment per domain and overall for the PTSD severity outcome
 
-
 #### Post-intervention (weeks)
+
+For the studies included in the meta-analyses, the earliest study was performed in `r format(min((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`, while the most recent study was performed in `r format(max((data_2023_12_4_LSR2_Awks2$year)), format="%Y")`. The median sample size across the studies was `r round(median(data_2023_12_4_LSR2_Awks2$totNrandom, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((data_2023_12_4_LSR2_Awks2$AGEm), na.rm=T))` years (ranging from `r round(min((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` to `r round(max((data_2023_12_4_LSR2_Awks2$AGEm),na.rm=T))` years). Intervention length ranged from 3 weeks to 20 weeks, with a median of 8 weeks. 
 
 `r length(table(data_2023_12_4_LSR2_Awks2$studyN))` studies provided data for PTSD symptom severity and contributed `r length(data_2023_12_4_LSR2_Awks2$tg1PTSD3PTm)` effect measures to the PTSD symptom severity meta-analysis. The forest plot for PTSD symptom severity is presented in Figure 3.
 
-```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
 #SUMMARIZE the SMDs from studies using metacont & POOL the data 
 LSR2mainMA = metacont(tg1PTSD3PTn , tg1PTSD3PTm ,tg1PTSD3PTsd ,tg2PTSD3PTn, tg2PTSD3PTm, tg2PTSD3PTsd ,
                       data = data_2023_12_4_LSR2_Awks2, studlab = study, sm = "SMD")
@@ -151,7 +154,7 @@ forest(LSR2mainMA,
        label.left = 'Favours exercise',
        label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
-       rightcols = c("effect", "ci"),
+       rightcols = c("effect", "ci", "rob"),
        fs.study = 10, ff.study = "italic",
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
@@ -334,7 +337,7 @@ forest(LSR2mainMA,
        label.left = 'Favours exercise',
        label.right = "Favours comparison",
        leftcols = c("study", "Intervention", "Comparison"),
-       rightcols = c("effect", "ci"),
+       rightcols = c("effect", "ci","rob"),
        fs.study = 10, ff.study = "italic",
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
