@@ -39,22 +39,6 @@ setwd("C:/Users/simon/OneDrive/Desktop/Github rep/LSR2_exercise_H")
 LSR2_data_long <- read_excel("/Rdata_20.05.xlsx")
 View(LSR2_data_long)
 
-###Import dataframes for tables, PRISMA, and rob
-####Import PRISMA table
-
-
-####Import study characteristics for eligable studies table
-
-
-####Import intervention details table
-intervention_table <- read_excel("/data for analysis. LSR2 1st update 20.05.2025/intervention_table.xlsx")
-
-####Import rob details table
-rob_detailed <- read_excel("/data for analysis. LSR2 1st update 20.05.2025/rob_detailed.xlsx")
-
-####Import rob image/figure
-
-
 
 ###Round off results to two digits
 settings.meta(digits = 2)
