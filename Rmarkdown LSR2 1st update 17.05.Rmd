@@ -1,11 +1,13 @@
 ---
 title: "The therapeutic potential of exercise in post-traumatic stress disorder and
   its underlying mechanisms. Update 1."
-author: "Simonne Wright, Virginia Chiocchia, Georgia Salanti"
+author: "Simonne Wright, Virginia Chiocchia"
 date: "2025-05-17"
 output: html_document
 ---
-<!-- Setup --> 
+
+<!-- Setup -->
+
 ```{r  setup, error=FALSE, warning=FALSE, message=FALSE, include=FALSE}
 
 ## Load packages
@@ -31,7 +33,8 @@ library(PRISMA2020)
 library(writexl)
 
 ##Set working directly
-setwd("C:/Users/simon/OneDrive/Desktop/Github rep/LSR2_exercise_H/")
+
+#setwd("C:/Users/simon/OneDrive/Desktop/Github rep/LSR2_exercise_H/")
 
 
 ##Import data
@@ -52,7 +55,8 @@ ptsd_ma_insuf_long <-subset(LSR2_data_long, included_ptsd_ma == "no")
 
 ```
 
-<!-- Create:PTSD df insufficient data  --> 
+<!-- Create:PTSD df insufficient data  -->
+
 ```{r include=FALSE }
 
 #PTSD dataset insufficient data 
@@ -95,7 +99,8 @@ rm(ptsd_insuf_control, ptsd_insuf_exercise, ptsd_insuf_long)
 
 ```
 
-<!-- Create:PTSD met-analysis (weeks) --> 
+<!-- Create:PTSD met-analysis (weeks) -->
+
 ```{r include=FALSE }
 #PTSD dataset for MA
 ### select the variables for ptsd_ma
@@ -197,17 +202,18 @@ ptsd_ma <- ptsd_ma %>%
 ###Drop unneccesary dataframes
 rm(ptsd_ma_control, ptsd_ma_exercise, ptsd_ma_long)
 
-``` 
+```
 
-<!-- Create:PTSD meta-analysis df no high risk of bias studies  --> 
+<!-- Create:PTSD meta-analysis df no high risk of bias studies  -->
+
 ```{r include=FALSE }
 #PTSD dataset for rob sensitivity analysis (no high risk of bias)
 ptsdma_sensitiv_rob <- subset(ptsd_ma, rob_ptsd != "High") 
                               
-``` 
+```
 
+<!-- Import tables -->
 
-<!-- Import tables --> 
 ```{r include=FALSE }
 #Table:PRISMA
 
@@ -226,51 +232,56 @@ study_characteristics_table_all <- read_excel("data for analysis. LSR2 1st updat
 ```
 
 # Results
-We identified ###### records. The PRISMA flow diagram is presented in Figuare 1. A total of `r length(table(ptsd_ma$Study))+length(table(ptsd_insuf$StudyN))` studies with data from `r sum(ptsd_ma$totN_random, na.rm=T)+ sum(ptsd_insuf$totN_random, na.rm=T)` participants were eligible for inclusion.The additional texts included secondary analyses, abstracts, trial registries, and protocol papers.
+
+We identified \###### records. The PRISMA flow diagram is presented in Figuare 1. A total of `r length(table(ptsd_ma$Study))+length(table(ptsd_insuf$StudyN))` studies with data from `r sum(ptsd_ma$totN_random, na.rm=T)+ sum(ptsd_insuf$totN_random, na.rm=T)` participants were eligible for inclusion.The additional texts included secondary analyses, abstracts, trial registries, and protocol papers.
 
 <!--  prisma (PRISMA_flowdiagram(prisma, previous = FALSE, other=FALSE)) -->
+
 **Figure 1:PRISMA flow diagram**
 
 ## Study description
+
 12 of the studies were RCTs, and 1 was a crossover RCT (Greene & Petruzzello, 2022).The specific intervention and comparison groups for the `r length(table(ptsd_ma$Study))+length(table(ptsd_insuf$Study))` eligible studies are presented in Table 1.
 
 ```{r echo=FALSE}
 knitr::kable(intervention_table[, 1:7], "pipe")
 ```
+
 *Aerobic = physical performance behaviour pattern that increases heart rate and respiration while using large muscle groups repetitively andrhythmically; anaerobic = physical performance behaviour pattern that is performed in short intense bursts with limited oxygen intake; mixed =combination of aerobic and anaerobic exercise. TAU = treatment as usual; WLC = waiting list control.*
 
 **Table 1: Specific interventions for all the eligable studies**
 
-`r length(table(ptsd_ma$Study))` of the `r  length(table(ptsd_ma$Study))+length(table(ptsd_insuf$Study))` studies were included in the meta-analyses (Bryant et al., 2023; Huseth, 2021; McGranahan et al., 2025; Nordbrandt et al., 2020; Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b; Young-McCaughan et al., 2022). 
- Meta-analysis was not feasible for `r length(table(ptsd_insuf$Study))` of the `r length(table(ptsd_ma$Study))+length(table(ptsd_insuf$Study))` studies (Ahar et al., 2024; Crombie et al., 2021; Greene & Petruzzello, 2022; Powers et al., 2015). 
-Three studies examined putative mediators which was not sufficient to carry out a meta-analysis (Crombie et al., 2021; Powers et al., 2015; Whitworth et al., 2019a).
+`r length(table(ptsd_ma$Study))` of the `r  length(table(ptsd_ma$Study))+length(table(ptsd_insuf$Study))` studies were included in the meta-analyses (Bryant et al., 2023; Huseth, 2021; McGranahan et al., 2025; Nordbrandt et al., 2020; Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b; Young-McCaughan et al., 2022). Meta-analysis was not feasible for `r length(table(ptsd_insuf$Study))` of the `r length(table(ptsd_ma$Study))+length(table(ptsd_insuf$Study))` studies (Ahar et al., 2024; Crombie et al., 2021; Greene & Petruzzello, 2022; Powers et al., 2015). Three studies examined putative mediators which was not sufficient to carry out a meta-analysis (Crombie et al., 2021; Powers et al., 2015; Whitworth et al., 2019a).
 
+Study characteristics of the `r length(table(ptsd_ma$Study))` studies included in the meta-analysis are presented in Table 2. From these `r length(table(ptsd_ma$Study))` studies, there were `r length(table(ptsd_ma$StudyN))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups (Young-McCaughan et al., 2022). Additionally, one of the first authors published findings from two different but methodologically similar trials in the same year (Whitworth et al., 2019a; Whitworth et al., 2019b). Study characteristics of the `r length(table(ptsd_insuf$Study))` studies not included in the meta-analysis are are also presented in Table 2. One study provided two eligible exercise interventions groups and one control group (Greene & Petruzzello, 2022).
 
-Study characteristics of the `r length(table(ptsd_ma$Study))` studies included in the meta-analysis are presented in Table 2. From these `r length(table(ptsd_ma$Study))` studies, there were `r length(table(ptsd_ma$StudyN))` eligible comparisons. One study presented findings from two independent comparisons, including a total of four distinct intervention groups (Young-McCaughan et al., 2022). Additionally, one of the first authors published findings from two different but methodologically similar trials in the same year (Whitworth et al., 2019a; Whitworth et al., 2019b). Study characteristics of the `r length(table(ptsd_insuf$Study))` studies not included in the meta-analysis are are also presented in Table 2. One study provided two eligible exercise interventions groups and one control group (Greene & Petruzzello, 2022). 
+<!-- Table: Study characteristics -->
 
-
-<!-- Table: Study characteristics --> 
 ```{r echo=FALSE}
 knitr::kable(study_characteristics_table_all[, 1:13], "pipe")
 ```
-*TAU = treatment as usual; WLC = waiting list control; CAPS-IV = Clinician-Administered PTSD Scale - 4th edition; PCL-4 = PTSD Checklist -version 4; PCL-5 = PTSD Checklist - version 5; PDS-5 = Posttraumatic Diagnostic Scale – version 5; HTQ = Harvard Trauma Questionnaire;Aerobic exercise = physical performance behaviour pattern that increases heart rate and respiration while using large muscle groups repetitivelyand rhythmically; anaerobic exercise = physical performance behaviour pattern that is performed in short intense bursts with limited oxygen intake;mixed exercise = combination of aerobic and anaerobic exercise; USA = United States of America.*
+
+*TAU = treatment as usual; WLC = waiting list control; CAPS-IV = Clinician-Administered PTSD Scale - 4th edition; PCL-4 = PTSD Checklist -version 4; PCL-5 = PTSD Checklist - version 5; PDS-5 = Posttraumatic Diagnostic Scale -- version 5; HTQ = Harvard Trauma Questionnaire;Aerobic exercise = physical performance behaviour pattern that increases heart rate and respiration while using large muscle groups repetitivelyand rhythmically; anaerobic exercise = physical performance behaviour pattern that is performed in short intense bursts with limited oxygen intake;mixed exercise = combination of aerobic and anaerobic exercise; USA = United States of America.*
 
 **Table 2: Study characteristics of the eligible studies**
 
 ## Primary outcome
+
 ### PTSD Symptom Severity
+
 #### Risk of bias for the PTSD symptom severity
-The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2. 10 studies reported PTSD outcome data post-intervention. Three studies did not report PTSD outcome data (Ahar et al., 2024; Crombie et al.,2021a; Greene & Petruzzello, 2022). Six of the nine studies had an overall high risk of bias, three had some concerns, and only one was had a low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(McGranahan et al., 2025; Voorendonk et al., 2023; Whitworth et al., 2019a;Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al.,2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
-<!-- Table: Rob PTSD --> 
+
+The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2. 10 studies reported PTSD outcome data post-intervention. Three studies did not report PTSD outcome data (Ahar et al., 2024; Crombie et al.,2021a; Greene & Petruzzello, 2022). Six of the nine studies had an overall high risk of bias, three had some concerns, and only one was had a low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(McGranahan et al., 2025; Voorendonk et al., 2023; Whitworth et al., 2019a;Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al.,2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022). <!-- Table: Rob PTSD -->
+
 ```{r echo=FALSE}
 knitr::kable(rob_detailed[, 1:7], "pipe")
 ```
+
 **Figure 2: Results of the risk of bias assessment per domain and overall for the PTSD severity outcome**
 
 #### Post-intervention (weeks)
-For the studies included in the meta-analyses, the earliest study was performed in `r format(min((ptsd_ma$year)), format="%Y")`, while the most recent study was performed in `r format(max((ptsd_ma$year)), format="%Y")`. The median sample size across the studies was `r round(median(ptsd_ma$totN_random, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((ptsd_ma$AGEm_study), na.rm=T))` years (ranging from `r round(min((ptsd_ma$AGEm_study),na.rm=T))` to `r round(max((ptsd_ma$AGEm_study),na.rm=T))` years). 
-Intervention length ranged from `r round(min((ptsd_ma$intervention_length), na.rm=T))` to`r round(max((ptsd_ma$intervention_length),na.rm=T))` weeks, with a median of `r round(median((ptsd_ma$intervention_length), na.rm=T))` weeks. 
 
+For the studies included in the meta-analyses, the earliest study was performed in `r format(min((ptsd_ma$year)), format="%Y")`, while the most recent study was performed in `r format(max((ptsd_ma$year)), format="%Y")`. The median sample size across the studies was `r round(median(ptsd_ma$totN_random, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((ptsd_ma$AGEm_study), na.rm=T))` years (ranging from `r round(min((ptsd_ma$AGEm_study),na.rm=T))` to `r round(max((ptsd_ma$AGEm_study),na.rm=T))` years). Intervention length ranged from `r round(min((ptsd_ma$intervention_length), na.rm=T))` to`r round(max((ptsd_ma$intervention_length),na.rm=T))` weeks, with a median of `r round(median((ptsd_ma$intervention_length), na.rm=T))` weeks.
 
 `r length(table(ptsd_ma$Study))` studies provided data for PTSD symptom severity and contributed `r length(table(ptsd_ma$StudyN))` effect measures to the PTSD symptom severity meta-analysis. The forest plot for PTSD symptom severity is presented in Figure 3.
 
@@ -294,15 +305,16 @@ forest(outcome_ptsd_meanchange_ma,
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
 ```
+
 **Figure 3: Meta-analysis of the effects of exercise on PTSD symptom severity.**
 
 The meta-analysis found some evidence of a difference in PTSD symptom severity reduction between exercise and comparison groups (`r paste0(outcome_ptsd_meanchange_ma$sm, " = ", round(outcome_ptsd_meanchange_ma$TE.random, 2), ", 95% CI ", round(outcome_ptsd_meanchange_ma$lower.random, 2), " to ", round(outcome_ptsd_meanchange_ma$upper.random, 2))`). A τ² of `r round(outcome_ptsd_meanchange_ma$tau2, 4)` suggests moderate between-study heterogeneity in effect sizes.
 
-
 #### Subgroup Analyses and Meta-regressions
 
 ##### Subgroup analysis by exercise intensity
-The test for interaction found some evidence of a difference between studies with moderate intensity and those with high-intensity exercise  (Figure 4). The effect of exercise appears to be larger in studies of high-intensity exercise compared to studies with moderate intensity 
+
+The test for interaction found some evidence of a difference between studies with moderate intensity and those with high-intensity exercise (Figure 4). The effect of exercise appears to be larger in studies of high-intensity exercise compared to studies with moderate intensity
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
 subgroup.intensity = update(outcome_ptsd_meanchange_ma, subgroup = intensity_EX) 
@@ -325,11 +337,11 @@ forest(subgroup.intensity,
 
 **Figure 4: Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise intensity**
 
-
 #### Subgroup analysis by specific exercise type
+
 We did not find any important differences between the effects of aerobic, anaerobic, or mixed exercise groups (Figure 5).
 
-```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
+```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=7}
 # create a new R object subgroup.tg1specEX  
 subgroup.tg1specEX = update(outcome_ptsd_meanchange_ma, subgroup = Exercise_type) 
 
@@ -352,7 +364,8 @@ forest(subgroup.tg1specEX,
 **Figure 5: Sub-group analysis of the effects of exercise on PTSD symptom severity by specific exercise type**
 
 ##### Subgroup analysis by exercise alone or tau/therapy augmented by exercise.
-We found that studies with exercise alone as intervention were associated with larger effects than those in studies where patients were additionally given treatment-as-usual or psychotherapy (Figure 6). 
+
+We found that studies with exercise alone as intervention were associated with larger effects than those in studies where patients were additionally given treatment-as-usual or psychotherapy (Figure 6).
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=6}
 # create a new R object subgroup.EXEaug  
@@ -376,8 +389,8 @@ forest(subgroup.EXEaug,
 
 **Figure 6: Sub-group analysis of the effects of exercise on PTSD symptom severity by exercise alone or TAU/therapy augmented by exercise**
 
-
 ##### Meta-regression by intervention length
+
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=4}
 
 # Do a meta-regression with the continuous covariate intervLENGTH (lenth of intervention - weeks) 
@@ -400,36 +413,35 @@ bubble(intervLENGTHreg, col.line = "blue", xlab = "Intervention Length (Weeks)")
 
 ##### **Heterogeneity explained by covariates**
 
-|       Moderator       |          Category          |                     $\beta$                     |                                                  95% CI                                                  |                  𝞽^2^                   |
+|       Moderator       |          Category          |                      $\beta$                       |                                                     95% CI                                                     |                    𝞽^2^                    |
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-|    Overall effect     |            *-*             |       `r round(outcome_ptsd_meanchange_ma$TE.random, 2)`        |              `r round(outcome_ptsd_meanchange_ma$lower.random, 2)` to `r round(outcome_ptsd_meanchange_ma$upper.random, 2)`              |       `r round(outcome_ptsd_meanchange_ma$tau2)`        |
-|  Exercise intensity   |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
-|                       |         *Moderate*         | `r round(subgroup.intensity$TE.random.w[2], 2)` | `r round(subgroup.intensity$lower.random.w[2], 2)` to `r round(subgroup.intensity$upper.random.w[2], 2)` | `r round(subgroup.intensity$tau2.w[2])` |
-|                       |           *High*           | `r round(subgroup.intensity$TE.random.w[1], 2)` | `r round(subgroup.intensity$lower.random.w[1], 2)` to `r round(subgroup.intensity$upper.random.w[1], 2)` | `r round(subgroup.intensity$tau2.w[1])` |
-|     Exercise type     |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
-|                       |         *Aerobic*          | `r round(subgroup.tg1specEX$TE.random.w[1], 2)` | `r round(subgroup.tg1specEX$lower.random.w[1], 2)` to `r round(subgroup.tg1specEX$upper.random.w[1], 2)` | `r round(subgroup.tg1specEX$tau2.w[1])` |
-|                       |        *Anaerobic*         | `r round(subgroup.tg1specEX$TE.random.w[3], 2)` | `r round(subgroup.tg1specEX$lower.random.w[3], 2)` to `r round(subgroup.tg1specEX$upper.random.w[3], 2)` | `r round(subgroup.tg1specEX$tau2.w[3])` |
-|                       |          *Mixed*           | `r round(subgroup.tg1specEX$TE.random.w[2], 2)` | `r round(subgroup.tg1specEX$lower.random.w[2], 2)` to `r round(subgroup.tg1specEX$upper.random.w[2], 2)` | `r round(subgroup.tg1specEX$tau2.w[2])` |
-| Exercise augmentation |            *-*             |                       \-                        |                                                    \-                                                    |                   \-                    |
-|                       |      *Exercise alone*      |  `r round(subgroup.EXEaug$TE.random.w[2], 2)`   |    `r round(subgroup.EXEaug$lower.random.w[2], 2)` to `r round(subgroup.EXEaug$upper.random.w[2], 2)`    |  `r round(subgroup.EXEaug$tau2.w[2])`   |
-|                       | *TAU/therapy + augmented*  |  `r round(subgroup.EXEaug$TE.random.w[1], 2)`   |    `r round(subgroup.EXEaug$lower.random.w[1], 2)` to `r round(subgroup.EXEaug$upper.random.w[1], 2)`    |  `r round(subgroup.EXEaug$tau2.w[1])`   |
-|  Intervention length  | *per unit (Week) increase* |     `r round(intervLENGTHreg$beta[2,], 2)`      |             `r round(intervLENGTHreg$ci.lb[2], 2)` to `r round(intervLENGTHreg$ci.ub[2], 2)`             |   `r round(intervLENGTHreg$tau2, 2)`    |
-
+|    Overall effect     |            *-*             | `r round(outcome_ptsd_meanchange_ma$TE.random, 2)` | `r round(outcome_ptsd_meanchange_ma$lower.random, 2)` to `r round(outcome_ptsd_meanchange_ma$upper.random, 2)` | `r round(outcome_ptsd_meanchange_ma$tau2, 2)` |
+|  Exercise intensity   |            *-*             |                         \-                         |                                                       \-                                                       |                     \-                     |
+|                       |         *Moderate*         |  `r round(subgroup.intensity$TE.random.w[2], 2)`   |    `r round(subgroup.intensity$lower.random.w[2], 2)` to `r round(subgroup.intensity$upper.random.w[2], 2)`    |  `r round(subgroup.intensity$tau2.w[2], 2)`   |
+|                       |           *High*           |  `r round(subgroup.intensity$TE.random.w[1], 2)`   |    `r round(subgroup.intensity$lower.random.w[1], 2)` to `r round(subgroup.intensity$upper.random.w[1], 2)`    |  `r round(subgroup.intensity$tau2.w[1], 2)`   |
+|     Exercise type     |            *-*             |                         \-                         |                                                       \-                                                       |                     \-                     |
+|                       |         *Aerobic*          |  `r round(subgroup.tg1specEX$TE.random.w[1], 2)`   |    `r round(subgroup.tg1specEX$lower.random.w[1], 2)` to `r round(subgroup.tg1specEX$upper.random.w[1], 2)`    |  `r round(subgroup.tg1specEX$tau2.w[1], 2)`   |
+|                       |        *Anaerobic*         |  `r round(subgroup.tg1specEX$TE.random.w[3], 2)`   |    `r round(subgroup.tg1specEX$lower.random.w[3], 2)` to `r round(subgroup.tg1specEX$upper.random.w[3], 2)`    |  `r round(subgroup.tg1specEX$tau2.w[3], 2)`   |
+|                       |          *Mixed*           |  `r round(subgroup.tg1specEX$TE.random.w[2], 2)`   |    `r round(subgroup.tg1specEX$lower.random.w[2], 2)` to `r round(subgroup.tg1specEX$upper.random.w[2], 2)`    |  `r round(subgroup.tg1specEX$tau2.w[2], 2)`   |
+| Exercise augmentation |            *-*             |                         \-                         |                                                       \-                                                       |                     \-                     |
+|                       |      *Exercise alone*      |    `r round(subgroup.EXEaug$TE.random.w[2], 2)`    |       `r round(subgroup.EXEaug$lower.random.w[2], 2)` to `r round(subgroup.EXEaug$upper.random.w[2], 2)`       |    `r round(subgroup.EXEaug$tau2.w[2], 2)`    |
+|                       | *TAU/therapy + augmented*  |    `r round(subgroup.EXEaug$TE.random.w[1], 2)`    |       `r round(subgroup.EXEaug$lower.random.w[1], 2)` to `r round(subgroup.EXEaug$upper.random.w[1], 2)`       |    `r round(subgroup.EXEaug$tau2.w[1], 2)`    |
+|  Intervention length  | *per unit (Week) increase* |       `r round(intervLENGTHreg$beta[2,], 2)`       |                `r round(intervLENGTHreg$ci.lb[2], 2)` to `r round(intervLENGTHreg$ci.ub[2], 2)`                |     `r round(intervLENGTHreg$tau2, 2)`     |
 
 #### Sensitivity Analyses
+
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=3}
 #PTSD MA MEAN CHANGE SCORES (Mcgrannan has unequal baseline scores)
   ## Summarize the SMDs from studies using metacont & POOL the data (mean change scores)
 
-outcome_ptsdma_sensitivity_rob = metacont(PTSD3_posttest_n_tg, ptsd3_meanchange_tg, ptsd3_sdchange_tg, PTSD3_posttest_n_cg, ptsd3_meanchange_cg, ptsd3_sdchange_cg ,
-                           data = ptsdma_sensitiv_rob, studlab = StudyN, sm = "SMD")
+outcome_ptsdma_sensitivity_rob = metacont(PTSD3_posttest_n_tg, ptsd3_meanchange_tg, ptsd3_sdchange_tg, 
+                                          PTSD3_posttest_n_cg, ptsd3_meanchange_cg, ptsd3_sdchange_cg, 
+                                          data = ptsdma_sensitiv_rob, studlab = StudyN, sm = "SMD")
 
 
 forest(outcome_ptsdma_sensitivity_rob, 
        sortvar = Intervention_tg,
-       common = FALSE,
        print.I2.ci = T, 
-       prediction=T,
        label.left = 'Favours exercise',
        label.right = "Favours comparison",
        leftcols = c("StudyN", "Intervention_tg", "Intervention_cg"),
@@ -438,14 +450,16 @@ forest(outcome_ptsdma_sensitivity_rob,
        col.diamond = "blue", col.diamond.lines = "black",
        col.square = "turquoise", col.square.lines = "black")
 ```
+
 **Figure 8: Meta-analysis of the effects of exercise on PTSD symptom severity when excluding studies with high risk of bias**
 
-No evidence of a difference in treatment dropout between exercise and comparison groups (`r paste0(outcome_ptsdma_sensitivity_rob$sm, " = ", round(exp(outcome_ptsdma_sensitivity_rob$TE.random), 2), ", 95% CI ", round(exp(outcome_ptsdma_sensitivity_rob$lower.random), 2), " to ", round(exp(outcome_ptsdma_sensitivity_rob$upper.random), 2))`) was found and there was large heterogeneity, as shown by the prediction interval (`r paste(round(exp(outcome_ptsdma_sensitivity_rob$lower.predict), 2), "to", round(exp(outcome_ptsdma_sensitivity_rob$upper.predict), 2))`).
+No evidence of a difference in treatment dropout between exercise and comparison groups (`r paste0(outcome_ptsdma_sensitivity_rob$sm, " = ", round(outcome_ptsdma_sensitivity_rob$TE.common, 2), ", 95% CI ", round(outcome_ptsdma_sensitivity_rob$lower.common, 2), " to ", round(outcome_ptsdma_sensitivity_rob$upper.common, 2))`) was found.
 
 #### Reporting bias
-Visual inspection of the funnel plot of standard error Hedges' g suggested possible publication bias in favour the of exercise group. 
 
-```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=3}
+Visual inspection of the contour-enhanced funnel plot did not suggest possible publication bias in favour the of exercise group.
+
+```{r echo=FALSE, fig.fullwidth=T}
  #Produce a funnel plot 
 funnel(outcome_ptsd_meanchange_ma, pch = 16,
        contour = c(0.9, 0.95, 0.99),
@@ -455,6 +469,7 @@ legend(0.25, 1.25,
        c("0.1 > p > 0.05", "0.05 > p > 0.01", "< 0.01"),
        fill = c("green", "yellow", "pink"), bty = "n")
 ```
+
 **Figure 9: Contour-enhanced funnel plot assessing publication bias**
 
 ```{r echo=FALSE, fig.fullwidth=T, fig.width=11, fig.height=3}
@@ -462,10 +477,11 @@ legend(0.25, 1.25,
 egger = metabias(outcome_ptsd_meanchange_ma, method.bias = "Egger")
 
 ```
-Small-study effects were assessed using Egger’s regression test for funnel plot asymmetry. The test yielded a t-value of `r round(egger$statistic, 2)` (df = `r round(egger$df, 2)`). The p-value was marginal (p = .095), suggesting potential asymmetry in the funnel plot. The estimated bias coefficient was `r round(egger$estimate, 2)`, indicating that smaller studies may be associated with larger effect sizes.
 
+Small-study effects were assessed using Egger's regression test for funnel plot asymmetry. The test yielded a t-value of `r round(egger$statistic, 2)` (df = `r round(egger$df, 2)`). The p-value was marginal (p = .095), suggesting potential asymmetry in the funnel plot. The estimated bias coefficient was `r round(egger$estimate, 2)`, indicating that smaller studies may be associated with larger effect sizes.
 
 ## Secondary outcomes
+
 ### Study dropout (weeks)
 
 `r length(table(ptsd_ma$Study))` studies provided data for study dropout, and contributed `r length(table(ptsd_ma$StudyN))` effect measures to the meta-analysis. The forest plot for the risk of dropout is presented in Figure 10.
@@ -498,4 +514,4 @@ forest(outcome_dropout,
 
 No evidence of a difference in dropout between exercise and comparison groups (`r paste0(outcome_dropout$sm, " = ", round(exp(outcome_dropout$TE.random), 2), ", 95% CI ", round(exp(outcome_dropout$lower.random), 2), " to ", round(exp(outcome_dropout$upper.random), 2))`) was found and there was large heterogeneity, as shown by the prediction interval (`r paste(round(exp(outcome_dropout$lower.predict), 2), "to", round(exp(outcome_dropout$upper.predict), 2))`).
 
-# Summary of Evidence 
+# Summary of Evidence
