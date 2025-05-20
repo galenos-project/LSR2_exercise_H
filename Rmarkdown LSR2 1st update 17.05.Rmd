@@ -31,12 +31,12 @@ library(PRISMA2020)
 library(writexl)
 
 ##Set working directly
-setwd("C:/Users/simon/OneDrive/Desktop/Github rep/LSR2_exercise_H")
+setwd("C:/Users/simon/OneDrive/Desktop/Github rep/LSR2_exercise_H/")
 
 
 ##Import data
 ###Import long Rdata_LSR2_2nd_iteration
-LSR2_data_long <- read_excel("/Rdata_20.05.xlsx")
+LSR2_data_long <- read_excel("Rdata_20.05.xlsx")
 View(LSR2_data_long)
 
 
@@ -212,13 +212,13 @@ ptsdma_sensitiv_rob <- subset(ptsd_ma, rob_ptsd != "High")
 #Table:PRISMA
 
 #Table:intervention_table
-intervention_table <- read_excel("/data for analysis. LSR2 1st update 20.05.2025/intervention_table.xlsx")
+intervention_table <- read_excel("data for analysis. LSR2 1st update 20.05.2025/intervention_table.xlsx")
 
 #Table:rob_detailed
-rob_detailed <- read_excel("C:/data for analysis. LSR2 1st update 20.05.2025/rob_detailed.xlsx")
+rob_detailed <- read_excel("data for analysis. LSR2 1st update 20.05.2025/rob_detailed.xlsx")
 
 #Table:study_characteristics_table_all
-study_characteristics_table_all <- read_excel("/data for analysis. LSR2 1st update 20.05.2025/study_characteristics_table_all.xlsx")
+study_characteristics_table_all <- read_excel("data for analysis. LSR2 1st update 20.05.2025/study_characteristics_table_all.xlsx")
 
 #Table:SoE
 
