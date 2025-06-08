@@ -32,11 +32,6 @@ library(robvis)
 library(PRISMA2020)
 library(writexl)
 
-##Set working directly
-
-setwd("C:/Users/simon/OneDrive/Desktop/Galenos/LS2/Datafor 1st update and 1st iteration/data for analysis. LSR2 1st iteration new/")
-
-
 ##Import data
 ###Import long Rdata_LSR2_2nd_iteration
 LSR2_data_long <- read_excel("Rdata_1st_iteration.xlsx")
@@ -272,9 +267,8 @@ knitr::kable(study_characteristics_table_all[, 1:13], "pipe")
 ## Primary outcome
 
 ### PTSD Symptom Severity
-
 #### Risk of bias for the PTSD symptom severity
-The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2 of the Extended Data. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
+The results of the risk of bias assessment per domain and study for the primary outcome, PTSD symptom severity is presented below in Figure 2. Nine studies reported PTSD outcome data post-intervention. Two studies did not report PTSD outcome data (Crombie et al., 2021a; Greene & Petruzzello, 2022). Five of the nine studies had an overall high risk of bias, three had some concerns, and only one was had low risk of bias. High risk of bias was mainly due to deviations from intended intervention (D2)(Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), missing outcome data (D3)(Rosenbaum et al., 2015; Voorendonk et al., 2023; Whitworth et al., 2019a; Whitworth et al., 2019b), and selection of reported results (D5)(Voorendonk et al., 2023; Young-McCaughan et al., 2022).
 
 ```{r echo=F, warning=F, fig.height=10}
 
@@ -286,7 +280,7 @@ rob_traffic_light(data = rob , tool = "ROB2")
 
 #### Post-intervention (weeks)
 
-For the studies included in the meta-analyses, the earliest study was performed in `r format(min((ptsd_ma$year)), format="%Y")`, while the most recent study was performed in `r format(max((ptsd_ma$year)), format="%Y")`. The median sample size across the studies was `r round(median(ptsd_ma$totN_random, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((ptsd_ma$AGEm_study), na.rm=T))` years (ranging from `r round(min((ptsd_ma$AGEm_study),na.rm=T))` to `r round(max((ptsd_ma$AGEm_study),na.rm=T))` years). Intervention length ranged from `r round(min((ptsd_ma$intervention_length), na.rm=T))` to`r round(max((ptsd_ma$intervention_length),na.rm=T))` weeks, with a median of `r round(median((ptsd_ma$intervention_length), na.rm=T))` weeks.
+For the studies included in the meta-analyses, the earliest study was performed in `r format(min((ptsd_ma$year)), format="%Y")`, while the most recent study was performed in `r format(max((ptsd_ma$year)), format="%Y")`. The median sample size across the studies was `r round(median(ptsd_ma$totN_random, na.rm=T))` participants per study. The median of the mean participant age was `r round(median((ptsd_ma$AGEm_study), na.rm=T))` years (ranging from `r round(min((ptsd_ma$AGEm_study),na.rm=T))` to `r round(max((ptsd_ma$AGEm_study),na.rm=T))` years). Intervention length ranged from `r round(min((ptsd_ma$intervention_length), na.rm=T))` to `r round(max((ptsd_ma$intervention_length),na.rm=T))` weeks, with a median of `r round(median((ptsd_ma$intervention_length), na.rm=T))` weeks.
 
 `r length(table(ptsd_ma$Study))` studies provided data for PTSD symptom severity and contributed `r length(table(ptsd_ma$StudyN))` effect measures to the PTSD symptom severity meta-analysis. The forest plot for PTSD symptom severity is presented in Figure 3.
 
@@ -313,7 +307,7 @@ forest(outcome_ptsd_post_ma,
 
 **Figure 3: Meta-analysis of the effects of exercise on PTSD symptom severity.**
 
-TThe meta-analysis found no evidence of a difference in PTSD symptom severity reduction between exercise and comparison groups (`r paste0(outcome_ptsd_post_ma$sm, " = ", round(outcome_ptsd_post_ma$TE.random, 2), ", 95% CI ", round(outcome_ptsd_post_ma$lower.random, 2), " to ", round(outcome_ptsd_post_ma$upper.random, 2))`). No statistical heterogeneity was observed (τ2=0).
+The meta-analysis found no evidence of a difference in PTSD symptom severity reduction between exercise and comparison groups (`r paste0(outcome_ptsd_post_ma$sm, " = ", round(outcome_ptsd_post_ma$TE.random, 2), ", 95% CI ", round(outcome_ptsd_post_ma$lower.random, 2), " to ", round(outcome_ptsd_post_ma$upper.random, 2))`). No statistical heterogeneity was observed (τ2=0).
 
 #### Subgroup Analyses and Meta-regressions
 
@@ -463,7 +457,7 @@ No evidence of a difference in treatment dropout between exercise and comparison
 
 #### Reporting bias
 
-Visual inspection of the contour-enhanced funnel plot did not suggest possible publication bias in favour the of exercise group.
+Visual inspection of the contour-enhanced funnel plot did not suggest possible publication bias in favour the of exercise group. 
 
 ```{r echo=FALSE, fig.fullwidth=T}
  #Produce a funnel plot 
